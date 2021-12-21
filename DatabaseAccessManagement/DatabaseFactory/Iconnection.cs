@@ -18,13 +18,20 @@ class MysqlConnectionAdapter : Iconnection
     {
         this.connection = connection;
     }
+    
+    
     MySqlConnection connection 
     public void close()
     {
         connection.close();
+        connection.Dispose();
     }
     public void runRawQuery(string query)
     {
-        connection.ExecuteNonQuery(query);
+         MySqlCommand cmd = new MySqlCommand(query, connection);
+      //if select
+        MySqlDataReader rdr = cmd.ExecuteReader();       
+      //if insert/update/delete
+       cmd.ExecuteNonQuery()
     }
 }
