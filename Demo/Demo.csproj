@@ -9,4 +9,8 @@
     <ProjectReference Include="..\DatabaseAccessManagement\DatabaseAccessManagement.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Modals\" />
+  </ItemGroup>
+
 </Project>
