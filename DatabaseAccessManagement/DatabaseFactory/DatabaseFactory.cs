@@ -7,12 +7,7 @@ using MySql.Data.MySqlClient;
 
 namespace DatabaseAccessManagement
 {
-	public interface IDatabase
-	{
-		IConnection CreateConnection();
-	}
-
-	public class MySql : IDatabase
+	public class MySqlDB : IDatabase
 	{
 		private string host;
 		private int port;
@@ -20,7 +15,7 @@ namespace DatabaseAccessManagement
 		private string password;
 		private string database;
 
-		public MySql(string host, int port, string database, string username, string password)
+		public MySqlDB(string host, int port, string database, string username, string password)
 		{
 			this.host = host;
 			this.port = port;
@@ -30,10 +25,16 @@ namespace DatabaseAccessManagement
 		}
 		public IConnection CreateConnection()
 		{
-			string connString = "Server=" + host + ";Database=" + database
-				+ ";port=" + port + ";User Id=" + username + ";password=" + password;
+			//string connString = "Server=" + host + ";Database=" + database
+			//	+ ";port=" + port + ";User Id=" + username + ";password=" + password;
+			StringBuilder sb = new StringBuilder(128);
+			sb.Append($"Server={host}");
+			sb.Append($";Database={database}");
+			sb.Append($";port={port}");
+			sb.Append($";User id={username}");
+			sb.Append($";password={password}");
 
-			MySqlConnection conn = new MySqlConnection(connString);
+			MySqlConnection conn = new MySqlConnection(sb.ToString());
 			return new MySqlConnectionAdapter(conn);
 		}
 	}
