@@ -40,8 +40,10 @@ namespace Demo
 				))
 				.Execute();*/
 			var x = new DML();
-			StudentA[] ok = { new StudentA { Id = 11, Name = "Nguye Van C", Score =9.6f}, new StudentA { Id = 10, Name = "Nguye Van A", Score = 1.4f }, new StudentA { Id = 9, Name = "Nguye Van B", Score = 6.9f } };
-            Console.WriteLine(x.Insert<StudentA>(ok));
+			Console.WriteLine(x.Delete<StudentA>(new StudentA { Name = "Nguyen Van A", Id = 10, Score = 5.5f }));
+
+			Console.WriteLine(x.Delete<StudentA>(new EqualToPredicate("Id", "10"), new StudentA { Name = "Nguyen Van A", Id = 10, Score = 5.5f }));
+            Console.WriteLine(x.Update<StudentA>(new EqualToPredicate("Id", "10"), new StudentA { Name = "Nguyen Van A", Id=10, Score=5.5f}));
             Console.ReadKey();
 		}
 	}

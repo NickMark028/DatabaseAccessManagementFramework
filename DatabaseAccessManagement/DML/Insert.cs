@@ -5,9 +5,9 @@ using System.Text;
 namespace DatabaseAccessManagement
 {
     public class StudentA
-    {public string Name;
+    {
+        public string Name;
         public int Id;
-
         public float Score;
         
     }
@@ -64,6 +64,40 @@ namespace DatabaseAccessManagement
             valuesString += ")";
 
             queryString += columnString + " VALUES " + valuesString;
+            return queryString;
+        }
+        public string Update<T>(SQLPredicate predicate, Object obj)
+        {
+            string queryString = "UPDATE " + obj.GetType().Name + "\nSET ";
+
+            string setString = "";
+
+            foreach (var prop in obj.GetType().GetFields())
+            {
+                if (prop.FieldType == typeof(string))
+                    setString += prop.Name + " = '" + prop.GetValue(obj) + "' ";
+                else setString += prop.Name + " = " + prop.GetValue(obj);
+                setString += ", ";
+            }
+            setString = setString.Remove(setString.Length - 2, 2);
+
+            queryString += setString + "\nWHERE " + predicate.ToString();
+
+            return queryString;
+        }
+
+        public string Delete<T>(SQLPredicate predicate, Object obj)
+        {
+            string queryString = "DELETE FROM " + obj.GetType().Name;
+            queryString +=  "\nWHERE " + predicate.ToString();
+
+            return queryString;
+        }
+
+        public string Delete<T>(Object obj)
+        {
+            string queryString = "DELETE FROM " + obj.GetType().Name;
+
             return queryString;
         }
     }
