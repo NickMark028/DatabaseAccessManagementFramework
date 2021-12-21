@@ -10,7 +10,7 @@ namespace DatabaseAccessManagement.DatabaseFactory
 {
 	abstract class Database
 	{
-		public abstract void createConnection();
+		public abstract Iconnection createConnection();
 
 	}
 
@@ -28,13 +28,13 @@ namespace DatabaseAccessManagement.DatabaseFactory
 			this.username = username;
 			this.password=password
 		}
-		public override void createConnection()
+		public override Iconnection createConnection()
         {
 			  String connString = "Server=" + host + ";Database=" + database
                 + ";port=" + port + ";User Id=" + username + ";password=" + password;
 
             MySqlConnection conn = new MySqlConnection(connString);
-			return 
+			return new MysqlConnectionAdapter(conn)
         }
     }
 }
