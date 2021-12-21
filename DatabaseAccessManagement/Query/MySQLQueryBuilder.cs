@@ -19,7 +19,7 @@ namespace DatabaseAccessManagement
 
 			stringBuilder.Append($"SELECT {columns}");
 			stringBuilder.Append($" FROM {TableName}");
-			//stringBuilder.Append($" WHERE {WherePredicate.ToString()}");
+			stringBuilder.Append($" WHERE {WherePredicate.ToString()}");
 			stringBuilder.Append(";");
 			return stringBuilder.ToString();
 		}

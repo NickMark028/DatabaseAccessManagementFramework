@@ -4,19 +4,6 @@ using System.Text;
 
 namespace DatabaseAccessManagement
 {
-	public interface ISQLPredicate
-	{
-		string ToString();
-	}
-
-	public class SampleSQLPredicate : ISQLPredicate
-	{
-		public override string ToString()
-		{
-			return "actor_id < 30";
-		}
-	}
-
 	public abstract class QueryBuilder<T>
 	{
 		public QueryBuilder()
@@ -33,7 +20,7 @@ namespace DatabaseAccessManagement
 			SelectedColumns = columns;
 			return this;
 		}
-		public QueryBuilder<T> Where(ISQLPredicate predicate)
+		public QueryBuilder<T> Where(SQLPredicate predicate)
 		{
 			WherePredicate = predicate;
 			return this;
@@ -46,7 +33,7 @@ namespace DatabaseAccessManagement
 		}
 
 		protected string[] SelectedColumns { get; private set; }
-		protected ISQLPredicate WherePredicate { get; private set; }
+		protected SQLPredicate WherePredicate { get; private set; }
 		protected string TableName { get; private set; }
 
 		protected abstract string ToRawQueryString();
