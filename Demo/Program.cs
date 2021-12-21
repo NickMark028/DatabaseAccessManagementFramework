@@ -14,7 +14,7 @@ namespace Demo
 	class Program
 	{
 		static void Main(string[] args)
-		{
+		{/*
 			GreaterThanPredicate greater1 = new GreaterThanPredicate("Score", "5");
 			GreaterThanPredicate greater2 = new GreaterThanPredicate("Score", "3");
 			LessThanPredicate less1 = new LessThanPredicate("Score", "10");
@@ -38,9 +38,11 @@ namespace Demo
 						new NotEqualToPredicate("address", "Ocean")
 					)
 				))
-				.Execute();
-
-			Console.ReadKey();
+				.Execute();*/
+			var x = new DML();
+			StudentA[] ok = { new StudentA { Id = 11, Name = "Nguye Van C", Score =9.6f}, new StudentA { Id = 10, Name = "Nguye Van A", Score = 1.4f }, new StudentA { Id = 9, Name = "Nguye Van B", Score = 6.9f } };
+            Console.WriteLine(x.Insert<StudentA>(ok));
+            Console.ReadKey();
 		}
 	}
 }
