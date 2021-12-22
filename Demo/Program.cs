@@ -26,8 +26,8 @@ namespace Demo
 				var enumerator = connection.RunRawQuery("SELECT * FROM actor;");
 				while (enumerator.MoveNext())
 				{
-					Console.Write(enumerator.Current["actor_id"] + " ");
-					Console.Write(enumerator.Current["first_name"] + " ");
+					Console.Write(enumerator.Current["actor_id"] + "\t");
+					Console.Write(enumerator.Current["first_name"] + ", ");
 					Console.WriteLine(enumerator.Current["last_name"]);
 				}
 
@@ -41,10 +41,6 @@ namespace Demo
 				Console.WriteLine(e.Message);
 				//throw;
 			}
-		}
-		public static void DemoLogn()
-		{
-
 		}
 		public static void DemoToSqlString()
 		{
