@@ -20,7 +20,7 @@ namespace DatabaseAccessManagement
 			SelectedColumns = columns;
 			return this;
 		}
-		public QueryBuilder<T> Where(SQLPredicate predicate)
+		public QueryBuilder<T> Where(IPredicate predicate)
 		{
 			WherePredicate = predicate;
 			return this;
@@ -33,7 +33,7 @@ namespace DatabaseAccessManagement
 		}
 
 		protected string[] SelectedColumns { get; private set; }
-		protected SQLPredicate WherePredicate { get; private set; }
+		protected IPredicate WherePredicate { get; private set; }
 		protected string TableName { get; private set; }
 
 		protected abstract string ToRawQueryString();

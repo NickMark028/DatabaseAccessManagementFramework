@@ -25,11 +25,11 @@ namespace DatabaseAccessManagement
 			MySqlCommand cmd = new MySqlCommand("INSERT INTO actor (first_name, last_name) VALUE (\"First\", \"Last\");", connection);
 			cmd.ExecuteNonQuery();
 		}
-		public void Delete<T>(SQLPredicate predicate)
+		public void Delete<T>(IPredicate predicate)
 		{
 			throw new NotImplementedException();
 		}
-		public void Update<T>(SQLPredicate predicate, object newValue)
+		public void Update<T>(IPredicate predicate, object newValue)
 		{
 			throw new NotImplementedException();
 		}

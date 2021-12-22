@@ -44,19 +44,21 @@ namespace Demo
 		}
 		public static void DemoToSqlString()
 		{
+			IPredicate predicate = new AndPredicate(
+				new OrPredicate(
+					new LessThanOrEqualPredicate("score", "5"),
+					new GreaterThanOrEqualPredicate("age", "3")
+				),
+				new AndPredicate(
+					new EqualToPredicate("id", "10"),
+					new NotEqualToPredicate("address", "Ocean")
+				)
+			);
+
 			var x = new MySQLQueryBuilder<Actor>();
 			x
 				.Select()
-				.Where(new NotPredicate(new AndPredicate(
-					new OrPredicate(
-						new LessThanOrEqualPredicate("score", "5"),
-						new GreaterThanOrEqualPredicate("age", "3")
-					),
-					new AndPredicate(
-						new EqualToPredicate("id", "10"),
-						new NotEqualToPredicate("address", "Ocean")
-					)
-				)))
+				.Where(predicate)
 				.Execute();
 		}
 

@@ -1,6 +1,6 @@
 ﻿namespace DatabaseAccessManagement
 {
-	public interface SQLPredicate
+	public interface IPredicate
 	{
 		string ToString();
 	}
