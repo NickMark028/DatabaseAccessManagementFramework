@@ -20,21 +20,18 @@ namespace Demo
 			try
 			{
 				IDatabase db = new MySqlDB("localhost", 3306, "sakila", "admin2", "MyPassWord456");
-				IConnection connection = db.CreateConnection();
-				connection.Open();
 
-				var enumerator = connection.RunRawQuery("SELECT * FROM actor;");
-				while (enumerator.MoveNext())
+				using (IConnection connection = db.CreateConnection())
 				{
-					Console.Write(enumerator.Current["actor_id"] + "\t");
-					Console.Write(enumerator.Current["first_name"] + ", ");
-					Console.WriteLine(enumerator.Current["last_name"]);
+					connection.Open();
+					var enumerator = connection.RunRawQuery("SELECT * FROM actor;");
+					while (enumerator.MoveNext())
+					{
+						Console.Write(enumerator.Current["actor_id"] + "\t");
+						Console.Write(enumerator.Current["first_name"] + ", ");
+						Console.WriteLine(enumerator.Current["last_name"]);
+					}
 				}
-
-				//connection.Insert<Program>(new string[1]);
-				connection.Close();
-
-				Console.WriteLine("Success");
 			}
 			catch (Exception e)
 			{

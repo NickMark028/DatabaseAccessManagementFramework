@@ -33,10 +33,13 @@ namespace DatabaseAccessManagement
 		{
 			throw new NotImplementedException();
 		}
+		public void Dispose()
+		{
+			connection.Dispose();
+		}
 		public void Close()
 		{
 			connection.Close();
-			connection.Dispose();
 		}
 
 		public IEnumerator<IDictionary<string, object>> RunRawQuery(string query)
@@ -44,5 +47,11 @@ namespace DatabaseAccessManagement
 			MySqlCommand cmd = new MySqlCommand(query, connection);
 			return new MySqlRowCursor(cmd.ExecuteReader());
 		}
+
+		public QueryBuilder<T> CreateQueryBuilder<T>()
+		{
+			throw new NotImplementedException();
+		}
+
 	}
 }

@@ -10,6 +10,7 @@ namespace DatabaseAccessManagement
 		{
 			TableName = typeof(T).Name;
 		}
+
 		public QueryBuilder<T> Select()
 		{
 			SelectedColumns = null;
