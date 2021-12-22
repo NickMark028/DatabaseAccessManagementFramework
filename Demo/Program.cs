@@ -44,25 +44,26 @@ namespace Demo
 		}
 		public static void DemoToSqlString()
 		{
-			//var x = new MySQLQueryBuilder<Actor>();
-			//x
-			//	.Select()
-			//	.Where(new AndPredicate(
-			//		new OrPredicate(
-			//			new LessThanOrEqualPredicate("score", "5"),
-			//			new GreaterThanOrEqualPredicate("age", "3")
-			//		),
-			//		new AndPredicate(
-			//			new EqualToPredicate("id", "10"),
-			//			new NotEqualToPredicate("address", "Ocean")
-			//		)
-			//	))
-			//	.Execute();
+			var x = new MySQLQueryBuilder<Actor>();
+			x
+				.Select()
+				.Where(new NotPredicate(new AndPredicate(
+					new OrPredicate(
+						new LessThanOrEqualPredicate("score", "5"),
+						new GreaterThanOrEqualPredicate("age", "3")
+					),
+					new AndPredicate(
+						new EqualToPredicate("id", "10"),
+						new NotEqualToPredicate("address", "Ocean")
+					)
+				)))
+				.Execute();
 		}
 
 		public static void Main(string[] args)
 		{
-			DemoConnectDB();
+			//DemoConnectDB();
+			DemoToSqlString();
 			Console.ReadKey();
 		}
 	}

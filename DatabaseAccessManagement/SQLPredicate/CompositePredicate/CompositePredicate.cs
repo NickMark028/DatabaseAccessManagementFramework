@@ -10,5 +10,7 @@
 			this.leftMember = leftMember;
 			this.rightMember = rightMember;
 		}
+
+		public abstract override string ToString();
 	}
 }
