@@ -50,8 +50,7 @@ namespace DatabaseAccessManagement
 
 		public QueryBuilder<T> CreateQueryBuilder<T>()
 		{
-			throw new NotImplementedException();
+			return new MySQLQueryBuilder<T>();
 		}
-
 	}
 }

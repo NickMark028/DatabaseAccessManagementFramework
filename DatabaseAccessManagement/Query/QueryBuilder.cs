@@ -26,11 +26,12 @@ namespace DatabaseAccessManagement
 			WherePredicate = predicate;
 			return this;
 		}
-		public object[] Execute()
+		public IEnumerator<IDictionary<string, object>> Execute(IConnection connection)
 		{
 			string rawSQL = ToRawQueryString();
-			Console.WriteLine(rawSQL);	//? Testing
-			return null;    // Todo: Execute query on the connection
+			Console.WriteLine(rawSQL);  //? Testing
+										//return null;    // Todo: Execute query on the connection
+			return connection.RunRawQuery(rawSQL);
 		}
 
 		protected string[] SelectedColumns { get; private set; }
