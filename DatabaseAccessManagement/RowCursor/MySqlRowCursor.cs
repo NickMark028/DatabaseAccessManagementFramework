@@ -7,7 +7,7 @@ using MySql.Data.MySqlClient;
 
 namespace DatabaseAccessManagement
 {
-	public class MySqlRowCursor : IEnumerator<IDictionary<string, object>>
+	public class MySqlRowCursor : IRowCursor
 	{
 		private MySqlDataReader reader;
 
@@ -16,35 +16,33 @@ namespace DatabaseAccessManagement
 			this.reader = reader;
 		}
 
-		public IDictionary<string, object> Current
+		public Row Current
 		{
 			get
 			{
-				IDictionary<string, object> result = new Dictionary<string, object>();
-
-				string columnName;
+				IList<object> cells = new List<object>(reader.FieldCount);
+				IDictionary<string, int> columnNameMap = new Dictionary<string, int>();
 				for (int i = 0; i < reader.FieldCount; i++)
 				{
-					columnName = reader.GetName(i);
-					result[columnName] = reader[i];
+					cells.Add(reader[i]);
+					columnNameMap[reader.GetName(i)] = i;
 				}
 
-				return result;
+				return new Row(cells, columnNameMap);
 			}
 		}
 		object IEnumerator.Current => Current;
-
-		public void Dispose()
+		public void Reset()
 		{
-			reader.Dispose();
+			// Already reset
 		}
 		public bool MoveNext()
 		{
 			return reader.Read();
 		}
-		public void Reset()
+		public void Dispose()
 		{
-			// Already reset
+			reader.Dispose();
 		}
 	}
 }

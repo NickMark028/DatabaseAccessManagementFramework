@@ -1,11 +1,11 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 
 namespace DatabaseAccessManagement
 {
-	class DataRow
+	public interface IRowCursor : IEnumerator<Row>
 	{
-
 	}
 }

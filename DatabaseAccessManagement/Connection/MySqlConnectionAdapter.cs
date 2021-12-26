@@ -20,37 +20,35 @@ namespace DatabaseAccessManagement
 		{
 			connection.Open();
 		}
-		public void Insert<T>(object[] rows)
+		public IRowCursor RunDqlQuery(string query)
+		{
+			MySqlCommand cmd = new MySqlCommand(query, connection);
+			return new MySqlRowCursor(cmd.ExecuteReader());
+		}
+		public QueryBuilder<T> CreateQueryBuilder<T>()
+		{
+			return new MySQLQueryBuilder<T>(this);
+		}
+		int IConnection.Insert<T>(object[] rows)
 		{
 			MySqlCommand cmd = new MySqlCommand("INSERT INTO actor (first_name, last_name) VALUE (\"First\", \"Last\");", connection);
-			cmd.ExecuteNonQuery();
+			return cmd.ExecuteNonQuery();
 		}
-		public void Delete<T>(IPredicate predicate)
+		int IConnection.Delete<T>(IPredicate predicate)
 		{
 			throw new NotImplementedException();
 		}
-		public void Update<T>(IPredicate predicate, object newValue)
+		int IConnection.Update<T>(IPredicate predicate, object newValue)
 		{
 			throw new NotImplementedException();
-		}
-		public void Dispose()
-		{
-			connection.Dispose();
 		}
 		public void Close()
 		{
 			connection.Close();
 		}
-
-		public IEnumerator<IDictionary<string, object>> RunRawQuery(string query)
+		public void Dispose()
 		{
-			MySqlCommand cmd = new MySqlCommand(query, connection);
-			return new MySqlRowCursor(cmd.ExecuteReader());
-		}
-
-		public QueryBuilder<T> CreateQueryBuilder<T>()
-		{
-			return new MySQLQueryBuilder<T>();
+			connection.Dispose();
 		}
 	}
 }

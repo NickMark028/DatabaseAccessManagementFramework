@@ -27,14 +27,16 @@ namespace Demo
 
 	class Program
 	{
-		public static void DemoConnectDB()
+		public static void DemoSelect()
 		{
 			try
 			{
-				IDatabase db = new MySqlDB("localhost", 3306, "sakila", "admin2", "MyPassWord456");
+				IDatabase db = new MySqlDB("localhost", 3306, "admin2", "MyPassWord456", "sakila");
 
+				Console.WriteLine("Creating connection ...");
 				using (IConnection connection = db.CreateConnection())
 				{
+					Console.WriteLine("\nOpening connection ...");
 					connection.Open();
 
 					IPredicate predicate = new OrPredicate(
@@ -42,28 +44,34 @@ namespace Demo
 						new GEP("country_id", "100")
 					);
 
+					Console.WriteLine("\nCreating a query builder ...");
 					QueryBuilder<Country> qb = connection.CreateQueryBuilder<Country>();
 					qb
 						.Select("country_id", "country")
 						.Where(predicate);
+					Console.WriteLine(qb.ToString());
 
-					IEnumerator<IDictionary<string, object>> enumerator = qb.Execute(connection);
-						
-					while (enumerator.MoveNext())
+					Console.WriteLine("\nExecuting a select query ...");
+					IRowCursor cursor = qb.Execute();
+
+					Console.WriteLine("\nData result ...");
+					while (cursor.MoveNext())
 					{
-						Console.Write(enumerator.Current["country_id"] + "\t");
-						Console.WriteLine(enumerator.Current["country"]);
+						Console.Write(cursor.Current["country_id"] + "\t");
+						Console.WriteLine(cursor.Current["country"]);
 					}
-				}
 
-				Console.WriteLine("Success");
+					Console.WriteLine("\nClosing connection ...");
+				}
+			
+				Console.WriteLine("\nDone.");
 			}
 			catch (Exception e)
 			{
 				Console.WriteLine(e.Message);
 			}
 		}
-		public static void DemoToSqlString()
+		public static void DemoPrecidateToString()
 		{
 			IPredicate predicate = new AndPredicate(
 				new OrPredicate(
@@ -76,16 +84,20 @@ namespace Demo
 				)
 			);
 
-			var queryBuilder = new MySQLQueryBuilder<Actor>();
-			queryBuilder
-				.Select()
-				.Where(predicate);
+			Console.WriteLine(predicate.ToString());
+
+			//var queryBuilder = new MySQLQueryBuilder<Actor>();
+			//queryBuilder
+			//	.Select()
+			//	.Where(predicate);
 		}
 
 		public static void Main(string[] args)
 		{
-			DemoConnectDB();
+			//DemoConnectDB();
 			//DemoToSqlString();
+			//PublicClass.Print();
+			DemoSelect();
 			Console.ReadKey();
 		}
 	}

@@ -15,7 +15,7 @@ namespace DatabaseAccessManagement
 		private string password;
 		private string database;
 
-		public MySqlDB(string host, int port, string database, string username, string password)
+		public MySqlDB(string host, int port, string username, string password, string database)
 		{
 			this.host = host;
 			this.port = port;
@@ -23,6 +23,7 @@ namespace DatabaseAccessManagement
 			this.username = username;
 			this.password = password;
 		}
+
 		public IConnection CreateConnection()
 		{
 			StringBuilder sb = new StringBuilder(128);

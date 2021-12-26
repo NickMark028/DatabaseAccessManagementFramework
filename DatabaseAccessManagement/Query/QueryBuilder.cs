@@ -6,8 +6,11 @@ namespace DatabaseAccessManagement
 {
 	public abstract class QueryBuilder<T>
 	{
-		public QueryBuilder()
+		private IConnection connection;
+
+		public QueryBuilder(IConnection connection)
 		{
+			this.connection = connection;
 			TableName = typeof(T).Name;
 		}
 
@@ -26,12 +29,10 @@ namespace DatabaseAccessManagement
 			WherePredicate = predicate;
 			return this;
 		}
-		public IEnumerator<IDictionary<string, object>> Execute(IConnection connection)
+		public IRowCursor Execute()
 		{
 			string rawSQL = ToRawQueryString();
-			Console.WriteLine(rawSQL);  //? Testing
-										//return null;    // Todo: Execute query on the connection
-			return connection.RunRawQuery(rawSQL);
+			return connection.RunDqlQuery(rawSQL);
 		}
 
 		protected string[] SelectedColumns { get; private set; }

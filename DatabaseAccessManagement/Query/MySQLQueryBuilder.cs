@@ -8,7 +8,7 @@ namespace DatabaseAccessManagement
 	{
 		private StringBuilder stringBuilder;
 
-		public MySQLQueryBuilder()
+		public MySQLQueryBuilder(IConnection connection) : base(connection)
 		{
 			stringBuilder = new StringBuilder(64);
 		}
