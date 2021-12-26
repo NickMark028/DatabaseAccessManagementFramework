@@ -6,10 +6,14 @@ namespace DatabaseAccessManagement
 {
 	public abstract class QueryBuilder<T>
 	{
-		public QueryBuilder()
+		private IConnection connection;
+
+		public QueryBuilder(IConnection connection)
 		{
+			this.connection = connection;
 			TableName = typeof(T).Name;
 		}
+
 		public QueryBuilder<T> Select()
 		{
 			SelectedColumns = null;
@@ -20,20 +24,19 @@ namespace DatabaseAccessManagement
 			SelectedColumns = columns;
 			return this;
 		}
-		public QueryBuilder<T> Where(SQLPredicate predicate)
+		public QueryBuilder<T> Where(IPredicate predicate)
 		{
 			WherePredicate = predicate;
 			return this;
 		}
-		public object[] Execute()
+		public IRowCursor Execute()
 		{
 			string rawSQL = ToRawQueryString();
-			Console.WriteLine(rawSQL);	//? Testing
-			return null;    // Todo: Execute query on the connection
+			return connection.RunDqlQuery(rawSQL);
 		}
 
 		protected string[] SelectedColumns { get; private set; }
-		protected SQLPredicate WherePredicate { get; private set; }
+		protected IPredicate WherePredicate { get; private set; }
 		protected string TableName { get; private set; }
 
 		protected abstract string ToRawQueryString();
