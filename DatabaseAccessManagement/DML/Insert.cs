@@ -13,10 +13,9 @@ namespace DatabaseAccessManagement
     }
 
 
-
     public class DML
     {
-        public string Insert<T>(Object[] obj)
+        public string Insert<T>(object[] obj)
         {
             string queryString = "INSERT INTO " + obj[0].GetType().Name + " ";
             string columnString = "(";
@@ -45,7 +44,7 @@ namespace DatabaseAccessManagement
             queryString += columnString + " \nVALUES " + valuesString;
             return queryString;
         }
-        public string Insert<T>(Object obj)
+        public string Insert<T>(object obj)
         {
             string queryString = "INSERT INTO " + obj.GetType().Name + " ";
             string columnString = "(";
@@ -66,7 +65,8 @@ namespace DatabaseAccessManagement
             queryString += columnString + " VALUES " + valuesString;
             return queryString;
         }
-        public string Update<T>(SQLPredicate predicate, Object obj)
+
+        public string Update<T>(IPredicate predicate, object obj)
         {
             string queryString = "UPDATE " + obj.GetType().Name + "\nSET ";
 
@@ -86,20 +86,19 @@ namespace DatabaseAccessManagement
             return queryString;
         }
 
-        public string Delete<T>(SQLPredicate predicate, Object obj)
+        public string Delete<T>(IPredicate predicate, object obj)
         {
             string queryString = "DELETE FROM " + obj.GetType().Name;
             queryString +=  "\nWHERE " + predicate.ToString();
 
             return queryString;
         }
+        //public string Delete<T>(object obj)
+        //{
+        //    string queryString = "DELETE FROM " + obj.GetType().Name;
 
-        public string Delete<T>(Object obj)
-        {
-            string queryString = "DELETE FROM " + obj.GetType().Name;
-
-            return queryString;
-        }
+        //    return queryString;
+        //}
     }
 
     public class MainProgram
