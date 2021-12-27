@@ -81,9 +81,25 @@ namespace DatabaseAccessManagement
 
 			
 		}
-		int IConnection.Update<T>(IPredicate predicate, object newValue)
+		int IConnection.Update<T>(IPredicate predicate, object obj)
 		{
-			throw new NotImplementedException();
+			string queryString = "UPDATE " + obj.GetType().Name + "\nSET ";
+
+			string setString = "";
+
+			foreach (var prop in obj.GetType().GetFields())
+			{
+				if (prop.FieldType == typeof(string))
+					setString += prop.Name + " = '" + prop.GetValue(obj) + "' ";
+				else setString += prop.Name + " = " + prop.GetValue(obj);
+				setString += ", ";
+			}
+			setString = setString.Remove(setString.Length - 2, 2);
+
+			queryString += setString + "\nWHERE " + predicate.ToString();
+			Console.WriteLine(queryString);
+			MySqlCommand cmd = new MySqlCommand(queryString, connection);
+			return cmd.ExecuteNonQuery();
 		}
 		public void Close()
 		{

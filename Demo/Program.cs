@@ -151,7 +151,7 @@ namespace Demo
 
                  
                     connection.Delete<Country>(
-                            new EqualToPredicate("country_id", "111")
+                            new EqualToPredicate("country_id", "110")
                         ); ; ;
 
                     Console.WriteLine("\nClosing connection ...");
@@ -164,13 +164,46 @@ namespace Demo
                 Console.WriteLine(e.Message);
             }
         }
+
+		public static void DemoUpdate()
+		{
+			try
+			{
+				IDatabase db = new MySqlDB("localhost", 3306, "root", "admin123", "sakila");
+
+				Console.WriteLine("Creating connection ...");
+				using (IConnection connection = db.CreateConnection())
+				{
+					Console.WriteLine("\nOpening connection ...");
+					connection.Open();
+
+
+					connection.Update<Country>(
+							new EqualToPredicate("country_id", "109")
+							{
+								'country' = 'hihi'
+							}
+						) ; 
+
+					Console.WriteLine("\nClosing connection ...");
+				}
+
+				Console.WriteLine("\nDone.");
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine(e.Message);
+			}
+		}
+
 		public static void Main(string[] args)
 		{
 			//DemoDmlToQueryString();
 
 			//DemoSelect();
 			//DemoInsert();
-			DemoDelete();
+			//DemoDelete();
+			DemoUpdate();
 			//DemoToSqlString();
 			//PublicClass.Print();
 
