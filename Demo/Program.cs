@@ -31,7 +31,7 @@ namespace Demo
 		{
 			try
 			{
-				IDatabase db = new MySqlDB("localhost", 3306, "root", "admin123", "sakila");
+				IDatabase db = new MySqlDB("localhost", 3306, "root", "28200752889396tu", "sakila");
 
 				Console.WriteLine("Creating connection ...");
 				using (IConnection connection = db.CreateConnection())
@@ -39,10 +39,7 @@ namespace Demo
 					Console.WriteLine("\nOpening connection ...");
 					connection.Open();
 
-					IPredicate predicate = new OrPredicate(
-						new AndPredicate(new GTP("country_id", "10"), new LEP("country_id", "30")),
-						new GEP("country_id", "100")
-					);
+					IPredicate predicate = new GTP("country_id", "0");
 
 					Console.WriteLine("\nCreating a query builder ...");
 					QueryBuilder<Country> qb = connection.CreateQueryBuilder<Country>();
@@ -109,7 +106,7 @@ namespace Demo
 		{
 			try
 			{
-				IDatabase db = new MySqlDB("localhost", 3306, "root", "admin123", "sakila");
+				IDatabase db = new MySqlDB("localhost", 3306, "root", "28200752889396tu", "sakila");
 
 				Console.WriteLine("Creating connection ...");
 				using (IConnection connection = db.CreateConnection())
@@ -124,7 +121,7 @@ namespace Demo
 
 					Console.WriteLine("\nCreating a query builder ...");
 					connection.Insert<Country>(
-						new Country[] { new Country() { country = "Afghanistan" }, new Country() { country = "hahahihi" } }
+						new Country[] { new Country() { country = "djgh9udjg9idhn9d" }, new Country() { country = "hahasdfgdfgdfgdgdhihi" } }
 						);
 
 					Console.WriteLine("\nClosing connection ...");
@@ -141,7 +138,7 @@ namespace Demo
 		{
 			try
 			{
-				IDatabase db = new MySqlDB("localhost", 3306, "root", "admin123", "sakila");
+				IDatabase db = new MySqlDB("localhost", 3306, "root", "28200752889396tu", "sakila");
 
 				Console.WriteLine("Creating connection ...");
 				using (IConnection connection = db.CreateConnection())
@@ -156,8 +153,8 @@ namespace Demo
 
 					Console.WriteLine("\nCreating a query builder ...");
 					connection.Delete<Country>(
-							new EqualToPredicate("country_id", "111")
-						); ; ;
+							new EqualToPredicate("country_id", "112")
+						);
 
 					Console.WriteLine("\nClosing connection ...");
 				}
@@ -183,7 +180,7 @@ namespace Demo
 
 					Console.WriteLine("\nCreating a query builder ...");
 					connection.Update<Country>(
-							new EqualToPredicate("country_id", "101"), new  { country = "YYYYY" }
+							new EqualToPredicate("country_id", "50"), new  { country = "YYYYY" }
 						); ; ;
 
 					Console.WriteLine("\nClosing connection ...");
@@ -200,10 +197,11 @@ namespace Demo
 		{
 			//DemoDmlToQueryString();
 
-			//DemoSelect();
-			//DemoInsert();
-			//DemoDelete();
+			
+			DemoInsert();
+			DemoDelete();
 			DemoUpdate();
+			DemoSelect();
 			//DemoToSqlString();
 			//PublicClass.Print();
 

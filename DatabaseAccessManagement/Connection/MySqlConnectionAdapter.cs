@@ -33,13 +33,11 @@ namespace DatabaseAccessManagement
 		{
 			string queryString = "INSERT INTO " + obj[0].GetType().Name + " ";
 			string columnString = "(";
-			foreach (var prop in obj[0].GetType().GetFields())
+			foreach (var prop in obj[0].GetType().GetProperties())
 			{
-				columnString += prop.Name + ", ";
-				
+				columnString += prop.Name + ", ";	
 			}
 
-		
 			columnString = columnString.Remove(columnString.Length - 2, 2);
 			columnString += ")";
 
@@ -48,11 +46,11 @@ namespace DatabaseAccessManagement
 			foreach (var item in obj)
 			{
 				valuesString += "\n(";
-				foreach (var prop in item.GetType().GetFields())
+				foreach (var prop in item.GetType().GetProperties())
 				{
-					if (prop.FieldType == typeof(string))
+					if (prop.PropertyType == typeof(string))
 						valuesString += "'" + prop.GetValue(item) + "'" + ", ";
-					else if (prop.FieldType == typeof(DateTime))
+					else if (prop.PropertyType == typeof(DateTime))
 					{
 						string? temp = (((DateTime)prop.GetValue(item))).ToString("MM/dd/yyyy HH:mm:ss");
 						valuesString += "'" + temp + "'" + ", ";
@@ -71,7 +69,6 @@ namespace DatabaseAccessManagement
 			Console.WriteLine(queryString);
 			return cmd.ExecuteNonQuery();
 		}
-
 		int IConnection.Delete<T>(IPredicate predicate)
 		{
 			string queryString = "DELETE FROM " + typeof(T).Name;
@@ -85,7 +82,6 @@ namespace DatabaseAccessManagement
 		{
 			string queryString = "UPDATE " + typeof(T).Name + "\nSET ";
 			string setString = "";
-			Console.WriteLine(obj.GetType().GetProperties());
 			foreach (var prop in obj.GetType().GetProperties())
 			{
 				if (prop.PropertyType == typeof(string))
@@ -98,12 +94,10 @@ namespace DatabaseAccessManagement
 				else setString += prop.Name + " = " + prop.GetValue(obj);
 				setString += ", ";
 			}
-			Console.WriteLine(setString);
 			setString = setString.Remove(setString.Length - 2, 2);
 
 			queryString += setString + "\nWHERE " + predicate.ToString();
 
-			Console.WriteLine(queryString);
 
 			MySqlCommand cmd = new MySqlCommand(queryString, connection);
 			return cmd.ExecuteNonQuery();
