@@ -139,7 +139,7 @@ namespace Demo
 		}
 		public static void DemoDelete()
 		{
-			try
+			/*try
 			{
 				IDatabase db = new MySqlDB("localhost", 3306, "root", "admin123", "sakila");
 
@@ -167,7 +167,7 @@ namespace Demo
 			catch (Exception e)
 			{
 				Console.WriteLine(e.Message);
-			}
+			}*/
 		}
 		public static void Main(string[] args)
 		{
