@@ -71,9 +71,15 @@ namespace DatabaseAccessManagement
 			Console.WriteLine(queryString);
 			return cmd.ExecuteNonQuery();
 		}
+
 		int IConnection.Delete<T>(IPredicate predicate)
 		{
-			throw new NotImplementedException();
+			string queryString = "DELETE FROM " + typeof(T).Name;
+			queryString += "\nWHERE " + predicate.ToString();
+			MySqlCommand cmd = new MySqlCommand(queryString, connection);
+			return cmd.ExecuteNonQuery();
+
+			
 		}
 		int IConnection.Update<T>(IPredicate predicate, object newValue)
 		{
