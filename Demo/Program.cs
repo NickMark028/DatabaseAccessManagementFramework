@@ -63,7 +63,7 @@ namespace Demo
 
 					Console.WriteLine("\nClosing connection ...");
 				}
-			
+
 				Console.WriteLine("\nDone.");
 			}
 			catch (Exception e)
@@ -91,13 +91,30 @@ namespace Demo
 			//	.Select()
 			//	.Where(predicate);
 		}
+		public static void DemoDmlToQueryString()
+		{
+			var x = new DML();
+			//Console.WriteLine(x.Delete<StudentA>(new StudentA { Name = "Nguyen Van A", Id = 10, Score = 5.5f }));
+			//Console.WriteLine();
+			Console.WriteLine(x.Insert<StudentA>(new StudentA { Name = "Nguyen Van A", Id = 10, Score = 5.5f }));
+			Console.WriteLine();
+
+			Console.WriteLine(x.Delete<StudentA>(new EqualToPredicate("Id", "10"), new StudentA { Name = "Nguyen Van A", Id = 10, Score = 5.5f }));
+			Console.WriteLine();
+
+			Console.WriteLine(x.Update<StudentA>(new EqualToPredicate("Id", "10"), new StudentA { Name = "Nguyen Van A", Id = 10, Score = 5.5f }));
+			Console.WriteLine();
+		}
 
 		public static void Main(string[] args)
 		{
+			DemoDmlToQueryString();
+
 			//DemoConnectDB();
 			//DemoToSqlString();
 			//PublicClass.Print();
-			DemoSelect();
+
+			//DemoSelect();
 			Console.ReadKey();
 		}
 	}
