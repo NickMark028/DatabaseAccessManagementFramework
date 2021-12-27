@@ -12,17 +12,17 @@ namespace Demo
 {
 	class Actor
 	{
-		public int actor_id;
-		public string first_name;
-		public string last_name;
-		public DateTime last_update;
+		public int actor_id { get; set; }
+		public string first_name { get; set; }
+		public string last_name { get; set; }
+		public DateTime last_update { get; set; }
 	}
 
 	class Country
 	{
-		public int country_id;
-		public string country;
-		public DateTime last_update;
+		public int country_id { get; set; }
+		public string country { get; set; }
+		public DateTime last_update { get; set; }
 	}
 
 	class Program
@@ -169,13 +169,41 @@ namespace Demo
 				Console.WriteLine(e.Message);
 			}
 		}
+		public static void DemoUpdate()
+		{
+			try
+			{
+				IDatabase db = new MySqlDB("localhost", 3306, "root", "28200752889396tu", "sakila");
+
+				Console.WriteLine("Creating connection ...");
+				using (IConnection connection = db.CreateConnection())
+				{
+					Console.WriteLine("\nOpening connection ...");
+					connection.Open();
+
+					Console.WriteLine("\nCreating a query builder ...");
+					connection.Update<Country>(
+							new EqualToPredicate("country_id", "101"), new  { country = "YYYYY" }
+						); ; ;
+
+					Console.WriteLine("\nClosing connection ...");
+				}
+
+				Console.WriteLine("\nDone.");
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine(e.Message);
+			}
+		}
 		public static void Main(string[] args)
 		{
 			//DemoDmlToQueryString();
 
 			//DemoSelect();
 			//DemoInsert();
-			DemoDelete();
+			//DemoDelete();
+			DemoUpdate();
 			//DemoToSqlString();
 			//PublicClass.Print();
 
