@@ -105,12 +105,44 @@ namespace Demo
 			Console.WriteLine(x.Update<StudentA>(new EqualToPredicate("Id", "10"), new StudentA { Name = "Nguyen Van A", Id = 10, Score = 5.5f }));
 			Console.WriteLine();
 		}
+		public static void DemoInsert()
+		{
+			try
+			{
+				IDatabase db = new MySqlDB("localhost", 3306, "root", "admin123", "sakila");
 
-		public static void Main(string[] args)
+				Console.WriteLine("Creating connection ...");
+				using (IConnection connection = db.CreateConnection())
+				{
+					Console.WriteLine("\nOpening connection ...");
+					connection.Open();
+
+					IPredicate predicate = new OrPredicate(
+						new AndPredicate(new GTP("country_id", "10"), new LEP("country_id", "30")),
+						new GEP("country_id", "100")
+					);
+
+					Console.WriteLine("\nCreating a query builder ...");
+					connection.Insert<Country>(
+						new Country[] { new Country() { country = "Afghanistan" }, new Country() { country = "hahahihi" } }
+						);
+
+					Console.WriteLine("\nClosing connection ...");
+				}
+
+				Console.WriteLine("\nDone.");
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine(e.Message);
+			}
+		}
+			public static void Main(string[] args)
 		{
 			//DemoDmlToQueryString();
 
-			DemoSelect();
+			//DemoSelect();
+			DemoInsert();
 			//DemoToSqlString();
 			//PublicClass.Print();
 

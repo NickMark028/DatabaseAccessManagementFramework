@@ -36,7 +36,10 @@ namespace DatabaseAccessManagement
 			foreach (var prop in obj[0].GetType().GetFields())
 			{
 				columnString += prop.Name + ", ";
+				
 			}
+
+		
 			columnString = columnString.Remove(columnString.Length - 2, 2);
 			columnString += ")";
 
@@ -49,15 +52,23 @@ namespace DatabaseAccessManagement
 				{
 					if (prop.FieldType == typeof(string))
 						valuesString += "'" + prop.GetValue(item) + "'" + ", ";
+					else if (prop.FieldType == typeof(DateTime))
+					{
+						string? temp = (((DateTime)prop.GetValue(item))).ToString("MM/dd/yyyy HH:mm:ss");
+						valuesString += "'" + temp + "'" + ", ";
+					}
+
 					else valuesString += prop.GetValue(item) + ", ";
+				
 				}
 				valuesString = valuesString.Remove(valuesString.Length - 2, 2);
 				valuesString += "), ";
 			}
 			valuesString = valuesString.Remove(valuesString.Length - 2, 2);
 			queryString += columnString + " \nVALUES " + valuesString;
-			
+
 			MySqlCommand cmd = new MySqlCommand(queryString, connection);
+			Console.WriteLine(queryString);
 			return cmd.ExecuteNonQuery();
 		}
 		int IConnection.Delete<T>(IPredicate predicate)
