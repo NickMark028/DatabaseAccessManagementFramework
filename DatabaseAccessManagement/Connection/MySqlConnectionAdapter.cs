@@ -29,9 +29,35 @@ namespace DatabaseAccessManagement
 		{
 			return new MySQLQueryBuilder<T>(this);
 		}
-		int IConnection.Insert<T>(object[] rows)
+		int IConnection.Insert<T>(object[] obj)
 		{
-			MySqlCommand cmd = new MySqlCommand("INSERT INTO actor (first_name, last_name) VALUE (\"First\", \"Last\");", connection);
+			string queryString = "INSERT INTO " + obj[0].GetType().Name + " ";
+			string columnString = "(";
+			foreach (var prop in obj[0].GetType().GetFields())
+			{
+				columnString += prop.Name + ", ";
+			}
+			columnString = columnString.Remove(columnString.Length - 2, 2);
+			columnString += ")";
+
+			string valuesString = "";
+
+			foreach (var item in obj)
+			{
+				valuesString += "\n(";
+				foreach (var prop in item.GetType().GetFields())
+				{
+					if (prop.FieldType == typeof(string))
+						valuesString += "'" + prop.GetValue(item) + "'" + ", ";
+					else valuesString += prop.GetValue(item) + ", ";
+				}
+				valuesString = valuesString.Remove(valuesString.Length - 2, 2);
+				valuesString += "), ";
+			}
+			valuesString = valuesString.Remove(valuesString.Length - 2, 2);
+			queryString += columnString + " \nVALUES " + valuesString;
+			
+			MySqlCommand cmd = new MySqlCommand(queryString, connection);
 			return cmd.ExecuteNonQuery();
 		}
 		int IConnection.Delete<T>(IPredicate predicate)

@@ -31,7 +31,7 @@ namespace Demo
 		{
 			try
 			{
-				IDatabase db = new MySqlDB("localhost", 3306, "admin2", "MyPassWord456", "sakila");
+				IDatabase db = new MySqlDB("localhost", 3306, "root", "admin123", "sakila");
 
 				Console.WriteLine("Creating connection ...");
 				using (IConnection connection = db.CreateConnection())
@@ -108,9 +108,9 @@ namespace Demo
 
 		public static void Main(string[] args)
 		{
-			DemoDmlToQueryString();
+			//DemoDmlToQueryString();
 
-			//DemoConnectDB();
+			DemoSelect();
 			//DemoToSqlString();
 			//PublicClass.Print();
 
