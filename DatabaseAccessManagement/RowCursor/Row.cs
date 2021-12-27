@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DatabaseAccessManagement
 {
-	public class Row
+	public class Row : IRow
 	{
 		private IList<object> cells;
 		private IDictionary<string, int> columnNameMap;

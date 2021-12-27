@@ -38,7 +38,6 @@ namespace DatabaseAccessManagement
 				columnString += prop.Name + ", ";
 				
 			}
-
 		
 			columnString = columnString.Remove(columnString.Length - 2, 2);
 			columnString += ")";

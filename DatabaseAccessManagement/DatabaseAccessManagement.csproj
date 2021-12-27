@@ -10,7 +10,6 @@
   <ItemGroup>
     <PackageReference Include="MySql.Data" Version="8.0.27" />
     <PackageReference Include="MySqlConnector" Version="2.1.0" />
-    <PackageReference Include="Unity" Version="5.11.10" />
   </ItemGroup>
 
 </Project>

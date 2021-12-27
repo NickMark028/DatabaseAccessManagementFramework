@@ -169,8 +169,14 @@ namespace Demo
 				Console.WriteLine(e.Message);
 			}
 		}
+
 		public static void Main(string[] args)
 		{
+			var x = new { };
+			Console.WriteLine();
+
+			x.GetType().GetProperties;
+
 			//DemoDmlToQueryString();
 
 			//DemoSelect();
