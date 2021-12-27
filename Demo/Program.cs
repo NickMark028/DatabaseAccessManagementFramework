@@ -139,36 +139,36 @@ namespace Demo
 		}
 		public static void DemoDelete()
 		{
-			/*try
-			{
-				IDatabase db = new MySqlDB("localhost", 3306, "root", "admin123", "sakila");
+            try
+            {
+                IDatabase db = new MySqlDB("localhost", 3306, "root", "admin123", "sakila");
 
-				Console.WriteLine("Creating connection ...");
-				using (IConnection connection = db.CreateConnection())
-				{
-					Console.WriteLine("\nOpening connection ...");
-					connection.Open();
+                Console.WriteLine("Creating connection ...");
+                using (IConnection connection = db.CreateConnection())
+                {
+                    Console.WriteLine("\nOpening connection ...");
+                    connection.Open();
 
-					IPredicate predicate = new OrPredicate(
-						new AndPredicate(new GTP("country_id", "10"), new LEP("country_id", "30")),
-						new GEP("country_id", "100")
-					);
+                    IPredicate predicate = new OrPredicate(
+                        new AndPredicate(new GTP("country_id", "10"), new LEP("country_id", "30")),
+                        new GEP("country_id", "100")
+                    );
 
-					Console.WriteLine("\nCreating a query builder ...");
-					connection.Delete<Country>(
-							new EqualToPredicate("country_id", "111")
-						); ; ;
+                    Console.WriteLine("\nCreating a query builder ...");
+                    connection.Delete<Country>(
+                            new EqualToPredicate("country_id", "111")
+                        ); ; ;
 
-					Console.WriteLine("\nClosing connection ...");
-				}
+                    Console.WriteLine("\nClosing connection ...");
+                }
 
-				Console.WriteLine("\nDone.");
-			}
-			catch (Exception e)
-			{
-				Console.WriteLine(e.Message);
-			}*/
-		}
+                Console.WriteLine("\nDone.");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
 		public static void Main(string[] args)
 		{
 			//DemoDmlToQueryString();
