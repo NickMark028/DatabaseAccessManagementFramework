@@ -31,7 +31,7 @@ namespace DatabaseAccessManagement
 		}
 		int IConnection.Insert<T>(object[] obj)
 		{
-			string queryString = "INSERT INTO " + obj[0].GetType().Name + " ";
+			string queryString = "INSERT INTO " + typeof(T).Name + " ";
 			string columnString = "(";
 			foreach (var prop in obj[0].GetType().GetProperties())
 			{

@@ -25,6 +25,12 @@ namespace Demo
 		public DateTime last_update;
 	}
 
+	class category
+    {
+		public int category_id { get; set; }
+		public string name { get; set; }
+		public DateTime last_update { get; set; }
+    }
 	class Program
 	{
 		public static void DemoSelect()
@@ -39,8 +45,8 @@ namespace Demo
 					Console.WriteLine("\nOpening connection ...");
 					connection.Open();
 
-					IExpression predicate = new OrPredicate(
-						new AndPredicate(new GTP("country_id", "10"), new LEP("country_id", "30")),
+					IExpression predicate = new OrExpression(
+						new AndExpression(new GTP("country_id", "10"), new LEP("country_id", "30")),
 						new GEP("country_id", "100")
 					);
 
@@ -73,12 +79,12 @@ namespace Demo
 		}
 		public static void DemoPrecidateToString()
 		{
-			IExpression predicate = new AndPredicate(
-				new OrPredicate(
+			IExpression predicate = new AndExpression(
+				new OrExpression(
 					new LEP("score", "5"),
 					new GEP("age", "3")
 				),
-				new AndPredicate(
+				new AndExpression(
 					new EqualToExpression("id", "10"),
 					new NotEqualToExpression("address", "Ocean")
 				)
@@ -109,7 +115,7 @@ namespace Demo
 		{
 			try
 			{
-				IDatabase db = new MySqlDB("localhost", 3306, "root", "admin123", "sakila");
+				IDatabase db = new MySqlDB("localhost", 3306, "root", "28200752889396tu", "sakila");
 
 				Console.WriteLine("Creating connection ...");
 				using (IConnection connection = db.CreateConnection())
@@ -117,15 +123,37 @@ namespace Demo
 					Console.WriteLine("\nOpening connection ...");
 					connection.Open();
 
-					IExpression predicate = new OrPredicate(
-						new AndPredicate(new GTP("country_id", "10"), new LEP("country_id", "30")),
+					IExpression predicate = new OrExpression(
+						new AndExpression(new GTP("country_id", "10"), new LEP("country_id", "30")),
 						new GEP("country_id", "100")
 					);
 
 					Console.WriteLine("\nCreating a query builder ...");
-					connection.Insert<Country>(
-						new Country[] { new Country() { country = "Afghanistan" }, new Country() { country = "hahahihi" } }
-						);
+					connection.Insert<category>(
+						new object[] {
+							new
+							{
+								name = "tu"
+							},
+							new
+                            {
+								name = "sdflsf"
+                            },
+							new
+							{
+								name = "zzzz"
+							}
+							,
+							new
+							{
+								name = "2222"
+							},
+							new
+							{
+								name = "1111"
+							}
+						}
+						) ;
 
 					Console.WriteLine("\nClosing connection ...");
 				}
@@ -149,8 +177,8 @@ namespace Demo
 					Console.WriteLine("\nOpening connection ...");
 					connection.Open();
 
-					IExpression predicate = new OrPredicate(
-						new AndPredicate(new GTP("country_id", "10"), new LEP("country_id", "30")),
+					IExpression predicate = new OrExpression(
+						new AndExpression(new GTP("country_id", "10"), new LEP("country_id", "30")),
 						new GEP("country_id", "100")
 					);
 
@@ -175,13 +203,12 @@ namespace Demo
 			var x = new { };
 			Console.WriteLine();
 
-			x.GetType().GetProperties;
 
 			//DemoDmlToQueryString();
 
 			//DemoSelect();
-			//DemoInsert();
-			DemoDelete();
+			DemoInsert();
+			//DemoDelete();
 			//DemoToSqlString();
 			//PublicClass.Print();
 
