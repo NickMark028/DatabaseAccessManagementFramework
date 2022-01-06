@@ -237,7 +237,7 @@ namespace Demo
 
 					Console.WriteLine("\nCreating a query builder ...");
 					connection.Insert<taskToDo>(
-						new taskToDo[] { new taskToDo() { task = "Afghanistan", isdone=false }, new taskToDo() { task = "hahahihi",isdone=true } }
+						new taskToDo[] { new taskToDo() { task = "test10", isdone=false }, new taskToDo() { task = "test11",isdone=true } }
 						) ;
 
 					Console.WriteLine("\nClosing connection ...");
@@ -250,6 +250,36 @@ namespace Demo
 				Console.WriteLine(e.Message);
 			}
 		}
+		public static void DemoDeleteTodoList()
+		{
+			try
+			{
+				IDatabase db = new MySqlDB("localhost", 3306, "root", "admin123", "todolist");
+
+				Console.WriteLine("Creating connection ...");
+				using (IConnection connection = db.CreateConnection())
+				{
+					Console.WriteLine("\nOpening connection ...");
+					connection.Open();
+
+				
+
+					Console.WriteLine("\nCreating a query builder ...");
+					connection.Delete<taskToDo>(
+							new EqualToPredicate("id","1")
+						); ; ;
+
+					Console.WriteLine("\nClosing connection ...");
+				}
+
+				Console.WriteLine("\nDone.");
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine(e.Message);
+			}
+		}
+
 
 		public static void Main(string[] args)
 		{
@@ -266,8 +296,8 @@ namespace Demo
 			//DemoToSqlString();
 			//PublicClass.Print();
 
-			DemoInsertTodolist();
-
+			//DemoInsertTodolist();
+			DemoDeleteTodoList();
 			//DemoSelect();
 			Console.ReadKey();
 		}
