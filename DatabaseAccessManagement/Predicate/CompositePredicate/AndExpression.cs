@@ -1,8 +1,8 @@
 ﻿namespace DatabaseAccessManagement
 {
-	public class AndPredicate : CompositePredicate
+	public class AndExpression : CompositeExpression
 	{
-		public AndPredicate(IPredicate leftPredicate, IPredicate rightPredicate)
+		public AndExpression(IExpression leftPredicate, IExpression rightPredicate)
 			: base(leftPredicate, rightPredicate) { }
 
 		public override string ToString()

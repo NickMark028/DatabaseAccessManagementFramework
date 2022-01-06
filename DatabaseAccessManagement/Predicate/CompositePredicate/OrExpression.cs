@@ -1,8 +1,8 @@
 ﻿namespace DatabaseAccessManagement
 {
-	public class OrPredicate : CompositePredicate
+	public class OrExpression : CompositeExpression
 	{
-		public OrPredicate(IPredicate leftPredicate, IPredicate rightPredicate)
+		public OrExpression(IExpression leftPredicate, IExpression rightPredicate)
 			: base(leftPredicate, rightPredicate) { }
 
 		public override string ToString()
