@@ -33,10 +33,9 @@ namespace DatabaseAccessManagement
 		{
 			string queryString = "INSERT INTO " + obj[0].GetType().Name + " ";
 			string columnString = "(";
-			foreach (var prop in obj[0].GetType().GetFields())
+			foreach (var prop in obj[0].GetType().GetProperties())
 			{
-				columnString += prop.Name + ", ";
-				
+				columnString += prop.Name + ", ";	
 			}
 		
 			columnString = columnString.Remove(columnString.Length - 2, 2);
@@ -47,11 +46,11 @@ namespace DatabaseAccessManagement
 			foreach (var item in obj)
 			{
 				valuesString += "\n(";
-				foreach (var prop in item.GetType().GetFields())
+				foreach (var prop in item.GetType().GetProperties())
 				{
-					if (prop.FieldType == typeof(string))
+					if (prop.PropertyType == typeof(string))
 						valuesString += "'" + prop.GetValue(item) + "'" + ", ";
-					else if (prop.FieldType == typeof(DateTime))
+					else if (prop.PropertyType == typeof(DateTime))
 					{
 						string? temp = (((DateTime)prop.GetValue(item))).ToString("MM/dd/yyyy HH:mm:ss");
 						valuesString += "'" + temp + "'" + ", ";
@@ -70,7 +69,6 @@ namespace DatabaseAccessManagement
 			Console.WriteLine(queryString);
 			return cmd.ExecuteNonQuery();
 		}
-
 		int IConnection.Delete<T>(IPredicate predicate)
 		{
 			string queryString = "DELETE FROM " + typeof(T).Name;
@@ -80,9 +78,29 @@ namespace DatabaseAccessManagement
 
 			
 		}
-		int IConnection.Update<T>(IPredicate predicate, object newValue)
+		int IConnection.Update<T>(IPredicate predicate, object obj)
 		{
-			throw new NotImplementedException();
+			string queryString = "UPDATE " + typeof(T).Name + "\nSET ";
+			string setString = "";
+			foreach (var prop in obj.GetType().GetProperties())
+			{
+				if (prop.PropertyType == typeof(string))
+					setString += prop.Name + " = '" + prop.GetValue(obj) + "' ";
+				else if (prop.PropertyType == typeof(DateTime))
+				{
+					string temp = (((DateTime)prop.GetValue(obj))).ToString("MM/dd/yyyy HH:mm:ss");
+					setString += "'" + temp + "'" + ", ";
+				}
+				else setString += prop.Name + " = " + prop.GetValue(obj);
+				setString += ", ";
+			}
+			setString = setString.Remove(setString.Length - 2, 2);
+
+			queryString += setString + "\nWHERE " + predicate.ToString();
+
+
+			MySqlCommand cmd = new MySqlCommand(queryString, connection);
+			return cmd.ExecuteNonQuery();
 		}
 		public void Close()
 		{
