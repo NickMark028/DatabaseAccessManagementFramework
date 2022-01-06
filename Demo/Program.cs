@@ -24,6 +24,12 @@ namespace Demo
 		public string country;
 		public DateTime last_update;
 	}
+	class taskToDo
+    {
+		public int id { get; set; }
+		public string task { get; set; }
+		public bool isdone { get; set; }
+	}
 
 	class Program
 	{
@@ -170,20 +176,97 @@ namespace Demo
 			}
 		}
 
+		public static void DemoSelectTodoList()
+		{
+			try
+			{
+				IDatabase db = new MySqlDB("localhost", 3306, "root", "admin123", "todolist");
+
+				Console.WriteLine("Creating connection ...");
+				using (IConnection connection = db.CreateConnection())
+				{
+					Console.WriteLine("\nOpening connection ...");
+					connection.Open();
+
+					IPredicate predicate = new OrPredicate(
+						new AndPredicate(new GTP("country_id", "10"), new LEP("country_id", "30")),
+						new GEP("country_id", "100")
+					);
+
+					Console.WriteLine("\nCreating a query builder ...");
+					QueryBuilder<Country> qb = connection.CreateQueryBuilder<Country>();
+					qb
+						.Select("country_id", "country")
+						.Where(predicate);
+					Console.WriteLine(qb.ToString());
+
+					Console.WriteLine("\nExecuting a select query ...");
+					IRowCursor cursor = qb.Execute();
+
+					Console.WriteLine("\nData result ...");
+					while (cursor.MoveNext())
+					{
+						Console.Write(cursor.Current["country_id"] + "\t");
+						Console.WriteLine(cursor.Current["country"]);
+					}
+
+					Console.WriteLine("\nClosing connection ...");
+				}
+
+				Console.WriteLine("\nDone.");
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine(e.Message);
+			}
+		}
+
+		public static void DemoInsertTodolist()
+		{
+			try
+			{
+				IDatabase db = new MySqlDB("localhost", 3306, "root", "admin123", "todolist");
+
+				Console.WriteLine("Creating connection ...");
+				using (IConnection connection = db.CreateConnection())
+				{
+					Console.WriteLine("\nOpening connection ...");
+					connection.Open();
+
+					
+
+					Console.WriteLine("\nCreating a query builder ...");
+					connection.Insert<taskToDo>(
+						new taskToDo[] { new taskToDo() { task = "Afghanistan", isdone=false }, new taskToDo() { task = "hahahihi",isdone=true } }
+						) ;
+
+					Console.WriteLine("\nClosing connection ...");
+				}
+
+				Console.WriteLine("\nDone.");
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine(e.Message);
+			}
+		}
+
 		public static void Main(string[] args)
 		{
 			var x = new { };
 			Console.WriteLine();
 
-			x.GetType().GetProperties;
+
 
 			//DemoDmlToQueryString();
 
 			//DemoSelect();
 			//DemoInsert();
-			DemoDelete();
+			//DemoDelete();
 			//DemoToSqlString();
 			//PublicClass.Print();
+
+			DemoInsertTodolist();
 
 			//DemoSelect();
 			Console.ReadKey();
