@@ -29,6 +29,46 @@ namespace DatabaseAccessManagement
 		{
 			return new MySQLQueryBuilder<T>(this);
 		}
+		int IConnection.Insert<T>(object row)
+        {
+				string queryString = "INSERT INTO " + obj[0].GetType().Name + " ";
+			string columnString = "(";
+			foreach (var prop in obj[0].GetType().GetProperties())
+			{
+				columnString += prop.Name + ", ";	
+			}
+		
+			columnString = columnString.Remove(columnString.Length - 2, 2);
+			columnString += ")";
+
+			string valueString = "";
+
+			foreach (var item in obj)
+			{
+				valueString += "\n(";
+				foreach (var prop in item.GetType().GetProperties())
+				{
+					if (prop.PropertyType == typeof(string))
+						valueString += "'" + prop.GetValue(item) + "'" + ", ";
+					else if (prop.PropertyType == typeof(DateTime))
+					{
+						string? temp = (((DateTime)prop.GetValue(item))).ToString("MM/dd/yyyy HH:mm:ss");
+						valueString += "'" + temp + "'" + ", ";
+					}
+
+					else valuesString += prop.GetValue(item) + ", ";
+				
+				}
+				valueString = valuesString.Remove(valuesString.Length - 2, 2);
+				valueString += "), ";
+			}
+			valueString = valuesString.Remove(valueString.Length - 2, 2);
+			queryString += columnString + " \nVALUE " + valuesString;
+
+			MySqlCommand cmd = new MySqlCommand(queryString, connection);
+			Console.WriteLine(queryString);
+			return cmd.ExecuteNonQuery();
+        }
 		int IConnection.Insert<T>(object[] obj)
 		{
 			string queryString = "INSERT INTO " + obj[0].GetType().Name + " ";
