@@ -2,13 +2,13 @@
 {
 	public abstract class CompositeExpression : IExpression
 	{
-		protected IExpression leftPredicate;
-		protected IExpression rightPredicate;
+		protected IExpression leftExpression;
+		protected IExpression rightExpression;
 
-		public CompositeExpression(IExpression leftPredicate, IExpression rightPredicate)
+		public CompositeExpression(IExpression leftExpression, IExpression rightExpression)
 		{
-			this.leftPredicate = leftPredicate;
-			this.rightPredicate = rightPredicate;
+			this.leftExpression = leftExpression;
+			this.rightExpression = rightExpression;
 		}
 
 		public abstract override string ToString();

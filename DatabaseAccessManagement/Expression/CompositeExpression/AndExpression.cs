@@ -2,12 +2,12 @@
 {
 	public class AndExpression : CompositeExpression
 	{
-		public AndExpression(IExpression leftPredicate, IExpression rightPredicate)
-			: base(leftPredicate, rightPredicate) { }
+		public AndExpression(IExpression leftExpression, IExpression rightExpression)
+			: base(leftExpression, rightExpression) { }
 
 		public override string ToString()
 		{
-			return "(" + leftPredicate.ToString() + " AND " + rightPredicate.ToString() + ")";
+			return "(" + leftExpression.ToString() + " AND " + rightExpression.ToString() + ")";
 		}
 	}
 }

@@ -2,12 +2,12 @@
 {
 	public class OrExpression : CompositeExpression
 	{
-		public OrExpression(IExpression leftPredicate, IExpression rightPredicate)
-			: base(leftPredicate, rightPredicate) { }
+		public OrExpression(IExpression leftExpression, IExpression rightExpression)
+			: base(leftExpression, rightExpression) { }
 
 		public override string ToString()
 		{
-			return "(" + leftPredicate.ToString() + " OR " + rightPredicate.ToString() + ")";
+			return "(" + leftExpression.ToString() + " OR " + rightExpression.ToString() + ")";
 		}
 	}
 }
