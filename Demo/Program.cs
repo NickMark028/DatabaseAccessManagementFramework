@@ -79,7 +79,7 @@ namespace Demo
 					new GEP("age", "3")
 				),
 				new AndPredicate(
-					new EqualToPredicate("id", "10"),
+					new EqualToExpression("id", "10"),
 					new NotEqualToPredicate("address", "Ocean")
 				)
 			);
@@ -99,10 +99,10 @@ namespace Demo
 			Console.WriteLine(x.Insert<StudentA>(new StudentA { Name = "Nguyen Van A", Id = 10, Score = 5.5f }));
 			Console.WriteLine();
 
-			Console.WriteLine(x.Delete<StudentA>(new EqualToPredicate("Id", "10"), new StudentA { Name = "Nguyen Van A", Id = 10, Score = 5.5f }));
+			Console.WriteLine(x.Delete<StudentA>(new EqualToExpression("Id", "10"), new StudentA { Name = "Nguyen Van A", Id = 10, Score = 5.5f }));
 			Console.WriteLine();
 
-			Console.WriteLine(x.Update<StudentA>(new EqualToPredicate("Id", "10"), new StudentA { Name = "Nguyen Van A", Id = 10, Score = 5.5f }));
+			Console.WriteLine(x.Update<StudentA>(new EqualToExpression("Id", "10"), new StudentA { Name = "Nguyen Van A", Id = 10, Score = 5.5f }));
 			Console.WriteLine();
 		}
 		public static void DemoInsert()
@@ -156,7 +156,7 @@ namespace Demo
 
 					Console.WriteLine("\nCreating a query builder ...");
 					connection.Delete<Country>(
-							new EqualToPredicate("country_id", "111")
+							new EqualToExpression("country_id", "111")
 						); ; ;
 
 					Console.WriteLine("\nClosing connection ...");
