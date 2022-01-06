@@ -1,8 +1,8 @@
 ﻿namespace DatabaseAccessManagement
 {
-	public class LessThanPredicate : BinaryOperatorPredicate
+	public class LessThanExpression : BinaryOperatorPredicate
 	{
-		public LessThanPredicate(string leftMember, string rightMember)
+		public LessThanExpression(string leftMember, string rightMember)
 			: base(leftMember, rightMember) { }
 
 		public override string ToString()

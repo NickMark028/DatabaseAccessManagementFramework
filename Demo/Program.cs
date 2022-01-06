@@ -3,10 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using DatabaseAccessManagement;
 
-using LTP = DatabaseAccessManagement.LessThanPredicate;
-using LEP = DatabaseAccessManagement.LessThanOrEqualPredicate;
-using GTP = DatabaseAccessManagement.GreaterThanPredicate;
-using GEP = DatabaseAccessManagement.GreaterThanOrEqualPredicate;
+using LTP = DatabaseAccessManagement.LessThanExpression;
+using LEP = DatabaseAccessManagement.LessThanOrEqualExpression;
+using GTP = DatabaseAccessManagement.GreaterThanExpression;
+using GEP = DatabaseAccessManagement.GreaterThanOrEqualExpression;
 
 namespace Demo
 {
@@ -80,7 +80,7 @@ namespace Demo
 				),
 				new AndPredicate(
 					new EqualToExpression("id", "10"),
-					new NotEqualToPredicate("address", "Ocean")
+					new NotEqualToExpression("address", "Ocean")
 				)
 			);
 

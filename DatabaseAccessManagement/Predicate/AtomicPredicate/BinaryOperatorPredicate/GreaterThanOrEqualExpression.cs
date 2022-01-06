@@ -1,8 +1,8 @@
 ﻿namespace DatabaseAccessManagement
 {
-	public class GreaterThanOrEqualPredicate : BinaryOperatorPredicate
+	public class GreaterThanOrEqualExpression : BinaryOperatorPredicate
 	{
-		public GreaterThanOrEqualPredicate(string leftMember, string rightMember)
+		public GreaterThanOrEqualExpression(string leftMember, string rightMember)
 			: base(leftMember, rightMember) { }
 
 		public override string ToString()

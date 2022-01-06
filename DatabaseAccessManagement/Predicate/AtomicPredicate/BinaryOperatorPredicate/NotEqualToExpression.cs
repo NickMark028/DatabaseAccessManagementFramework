@@ -1,8 +1,8 @@
 ﻿namespace DatabaseAccessManagement
 {
-	public class NotEqualToPredicate : BinaryOperatorPredicate
+	public class NotEqualToExpression : BinaryOperatorPredicate
 	{
-		public NotEqualToPredicate(string leftMember, string rightMember)
+		public NotEqualToExpression(string leftMember, string rightMember)
 			: base(leftMember, rightMember) { }
 
 		public override string ToString()
