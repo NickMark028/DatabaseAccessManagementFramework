@@ -69,7 +69,7 @@ namespace DatabaseAccessManagement
 			Console.WriteLine(queryString);
 			return cmd.ExecuteNonQuery();
 		}
-		int IConnection.Delete<T>(IPredicate predicate)
+		int IConnection.Delete<T>(IExpression predicate)
 		{
 			string queryString = "DELETE FROM " + typeof(T).Name;
 			queryString += "\nWHERE " + predicate.ToString();
@@ -78,7 +78,7 @@ namespace DatabaseAccessManagement
 
 			
 		}
-		int IConnection.Update<T>(IPredicate predicate, object obj)
+		int IConnection.Update<T>(IExpression predicate, object obj)
 		{
 			string queryString = "UPDATE " + typeof(T).Name + "\nSET ";
 			string setString = "";

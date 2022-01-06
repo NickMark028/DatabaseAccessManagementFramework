@@ -1,6 +1,6 @@
 ﻿namespace DatabaseAccessManagement
 {
-	public abstract class BinaryOperatorPredicate : IPredicate
+	public abstract class BinaryOperatorPredicate : IExpression
 	{
 		protected string leftMember;
 		protected string rightMember;

@@ -66,7 +66,7 @@ namespace DatabaseAccessManagement
             return queryString;
         }
 
-        public string Update<T>(IPredicate predicate, object obj)
+        public string Update<T>(IExpression predicate, object obj)
         {
             string queryString = "UPDATE " + obj.GetType().Name + "\nSET ";
 
@@ -86,7 +86,7 @@ namespace DatabaseAccessManagement
             return queryString;
         }
 
-        public string Delete<T>(IPredicate predicate, object obj)
+        public string Delete<T>(IExpression predicate, object obj)
         {
             string queryString = "DELETE FROM " + obj.GetType().Name;
             queryString +=  "\nWHERE " + predicate.ToString();

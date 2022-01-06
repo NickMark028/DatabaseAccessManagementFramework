@@ -39,7 +39,7 @@ namespace Demo
 					Console.WriteLine("\nOpening connection ...");
 					connection.Open();
 
-					IPredicate predicate = new OrPredicate(
+					IExpression predicate = new OrPredicate(
 						new AndPredicate(new GTP("country_id", "10"), new LEP("country_id", "30")),
 						new GEP("country_id", "100")
 					);
@@ -73,7 +73,7 @@ namespace Demo
 		}
 		public static void DemoPrecidateToString()
 		{
-			IPredicate predicate = new AndPredicate(
+			IExpression predicate = new AndPredicate(
 				new OrPredicate(
 					new LEP("score", "5"),
 					new GEP("age", "3")
@@ -117,7 +117,7 @@ namespace Demo
 					Console.WriteLine("\nOpening connection ...");
 					connection.Open();
 
-					IPredicate predicate = new OrPredicate(
+					IExpression predicate = new OrPredicate(
 						new AndPredicate(new GTP("country_id", "10"), new LEP("country_id", "30")),
 						new GEP("country_id", "100")
 					);
@@ -149,7 +149,7 @@ namespace Demo
 					Console.WriteLine("\nOpening connection ...");
 					connection.Open();
 
-					IPredicate predicate = new OrPredicate(
+					IExpression predicate = new OrPredicate(
 						new AndPredicate(new GTP("country_id", "10"), new LEP("country_id", "30")),
 						new GEP("country_id", "100")
 					);

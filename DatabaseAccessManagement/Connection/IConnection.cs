@@ -9,8 +9,8 @@ namespace DatabaseAccessManagement
 		IRowCursor RunDqlQuery(string query);
 		QueryBuilder<T> CreateQueryBuilder<T>();
 		int Insert<T>(object[] rows);
-		int Delete<T>(IPredicate predicate);
-		int Update<T>(IPredicate predicate, object newValue);
+		int Delete<T>(IExpression predicate);
+		int Update<T>(IExpression predicate, object newValue);
 		void Close();
 	}
 }
