@@ -5,7 +5,6 @@ namespace DatabaseAccessManagement
 	{
 		public EqualToExpression(string leftMember, string rightMember)
 			: base(leftMember, rightMember) { }
-
 		public EqualToExpression(string leftMember, Int64 rightMember)
 			: base(leftMember, rightMember) { }
 		public EqualToExpression(string leftMember, Decimal rightMember) 
