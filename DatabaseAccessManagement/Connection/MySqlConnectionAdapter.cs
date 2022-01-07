@@ -42,7 +42,7 @@ namespace DatabaseAccessManagement
 		}
 		int IConnection.Insert<T>(object[] obj)
 		{
-			string queryString = "INSERT INTO " + typeof(T).Name + " ";
+			string queryString = "INSERT INTO `" + typeof(T).Name + "` ";
 			string columnString = "(";
 			foreach (var prop in obj[0].GetType().GetProperties())
 			{
@@ -83,13 +83,13 @@ namespace DatabaseAccessManagement
 		}
 		int IConnection.Delete<T>(IExpression predicate)
 		{
-			string queryString = "DELETE FROM " + typeof(T).Name;
+			string queryString = "DELETE FROM `" + typeof(T).Name+"`"; 
 			queryString += "\nWHERE " + predicate.ToString();
 			return RunDmlQuery(queryString);
 		}
 		int IConnection.Update<T>(IExpression predicate, object obj)
 		{
-			string queryString = "UPDATE " + typeof(T).Name + "\nSET ";
+			string queryString = "UPDATE `" + typeof(T).Name + "`\nSET ";
 			string setString = "";
 			foreach (var prop in obj.GetType().GetProperties())
 			{
