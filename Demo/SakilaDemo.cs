@@ -222,5 +222,37 @@ namespace Demo
 				Console.WriteLine(e.Message);
 			}
 		}
+		public void DemoUpdate()
+		{
+			try
+			{
+				IDatabase db = new MySqlDb("localhost", 3306, "root", "admin123", "sakila");
+
+				Console.WriteLine("Creating connection ...");
+				using (IConnection connection = db.CreateConnection())
+				{
+					Console.WriteLine("\nOpening connection ...");
+					connection.Open();
+
+
+
+					Console.WriteLine("\nUpdating");
+					connection.Update<TaskToDo>(
+						new EqualToExpression("country_id", "10"), new
+						{
+							country = "newcountry"
+						}
+						);
+
+					Console.WriteLine("\nClosing connection ...");
+				}
+
+				Console.WriteLine("\nDone.");
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine(e.Message);
+			}
+		}
 	}
 }
