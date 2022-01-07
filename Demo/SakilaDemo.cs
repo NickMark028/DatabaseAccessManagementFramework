@@ -42,8 +42,8 @@ namespace Demo
 					connection.Open();
 
 					IExpression predicate = new OrExpression(
-						new AndExpression(new GTP("country_id", "10"), new LEP("country_id", "30")),
-						new GEP("country_id", "100")
+						new AndExpression(new GreaterThanExpression("country_id", "10"), new LessThanOrEqualExpression("country_id", "30")),
+						new GreaterThanExpression("country_id", "100")
 					);
 
 					Console.WriteLine("\nCreating a query builder ...");
@@ -75,10 +75,10 @@ namespace Demo
 		}
 		public void DemoPrecidateToString()
 		{
-			IExpression predicate = new AndExpression(
+			IExpression expression = new AndExpression(
 				new OrExpression(
-					new LEP("score", "5"),
-					new GEP("age", "3")
+					new LessThanExpression("score", "5"),
+					new GreaterThanExpression("age", "3")
 				),
 				new AndExpression(
 					new EqualToExpression("id", "10"),
@@ -86,7 +86,7 @@ namespace Demo
 				)
 			);
 
-			Console.WriteLine(predicate.ToString());
+			Console.WriteLine(expression.ToString());
 
 			//var queryBuilder = new MySQLQueryBuilder<Actor>();
 			//queryBuilder
@@ -120,8 +120,8 @@ namespace Demo
 					connection.Open();
 
 					IExpression predicate = new OrExpression(
-						new AndExpression(new GTP("country_id", "10"), new LEP("country_id", "30")),
-						new GEP("country_id", "100")
+						new AndExpression(new GreaterThanExpression("country_id", "10"), new LessThanExpression("country_id", "30")),
+						new GreaterThanExpression("country_id", "100")
 					);
 
 					Console.WriteLine("\nCreating a query builder ...");
@@ -173,7 +173,7 @@ namespace Demo
 					Console.WriteLine("\nOpening connection ...");
 					connection.Open();
 
-					IExpression predicate = new GEP("country_id", "101");
+					IExpression predicate = new GreaterThanExpression("country_id", "101");
 
 					Console.WriteLine("\nCreating a query builder ...");
 					connection.Insert<Country>(
@@ -203,8 +203,8 @@ namespace Demo
 					connection.Open();
 
 					IExpression predicate = new OrExpression(
-						new AndExpression(new GTP("country_id", "10"), new LEP("country_id", "30")),
-						new GEP("country_id", "100")
+						new AndExpression(new GreaterThanExpression("country_id", "10"), new LessThanExpression("country_id", "30")),
+						new GreaterThanExpression("country_id", "100")
 					);
 
 					Console.WriteLine("\nCreating a query builder ...");
