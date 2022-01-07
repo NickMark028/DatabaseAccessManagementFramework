@@ -8,16 +8,16 @@ namespace Demo
 		{
 			var sakilaDemo = new SakilaDemo();
 			//sakilaDemo.DemoSelect();
-			//sakilaDemo.DemoInsertMany();
-			sakilaDemo.DemoInsert();
-		//	sakilaDemo.DemoDelete();
+			//sakilaDemo.DemoInsertMany();			
+			//sakilaDemo.DemoDelete();
+			sakilaDemo.DemoUpdate();
 
 
 
 
 		//	var toDoListDemo = new ToDoListDemo();
 			//toDoListDemo.DemoSelect();
-			//	toDoListDemo.DemoInsert();
+			//toDoListDemo.DemoInsert();
 			//toDoListDemo.DemoInsertMany();
 			//toDoListDemo.DemoDelete();
 			//toDoListDemo.DemoUpdate();

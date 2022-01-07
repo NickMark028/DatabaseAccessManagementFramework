@@ -173,7 +173,7 @@ namespace Demo
 					Console.WriteLine("\nOpening connection ...");
 					connection.Open();
 
-					IExpression predicate = new GreaterThanExpression("country_id", "1");
+				
 
 					Console.WriteLine("\nInserting ...");
 					connection.Insert<Country>(
@@ -207,9 +207,9 @@ namespace Demo
 						new GreaterThanExpression("country_id", "100")
 					);
 
-					Console.WriteLine("\nCreating a query builder ...");
-					connection.Delete<Country>(
-							new EqualToExpression("country_id", "111")
+					Console.WriteLine("\nDeleting ...");
+					connection.Delete<Category>(
+							new EqualToExpression("category_id", "25")
 						); ; ;
 
 					Console.WriteLine("\nClosing connection ...");
@@ -237,7 +237,7 @@ namespace Demo
 
 
 					Console.WriteLine("\nUpdating");
-					connection.Update<TaskToDo>(
+					connection.Update<Country>(
 						new EqualToExpression("country_id", "10"), new
 						{
 							country = "newcountry"
