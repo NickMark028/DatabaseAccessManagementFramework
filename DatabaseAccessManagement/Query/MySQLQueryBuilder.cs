@@ -6,20 +6,18 @@ namespace DatabaseAccessManagement
 {
 	public class MySQLQueryBuilder<T> : QueryBuilder<T>
 	{
-		private StringBuilder stringBuilder;
-
 		public MySQLQueryBuilder(IConnection connection) : base(connection)
 		{
-			stringBuilder = new StringBuilder(64);
 		}
 
 		protected override string ToRawQueryString()
 		{
+			StringBuilder stringBuilder = new StringBuilder(64);
 			string columns = SelectedColumns == null ? "*": ArrayExtension.ToString(SelectedColumns);
 
 			stringBuilder.Append($"SELECT {columns}");
-			stringBuilder.Append($" FROM {TableName}");
-			stringBuilder.Append($" WHERE {WherePredicate.ToString()}");
+			stringBuilder.Append($"\nFROM {TableName}");
+			stringBuilder.Append($"\nWHERE {WhereExpression.ToString()}");
 			stringBuilder.Append(";");
 			return stringBuilder.ToString();
 		}

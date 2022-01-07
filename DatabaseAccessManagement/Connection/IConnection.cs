@@ -11,8 +11,8 @@ namespace DatabaseAccessManagement
 		QueryBuilder<T> CreateQueryBuilder<T>();
 		int Insert<T>(object row);
 		int Insert<T>(object[] rows);
-		int Delete<T>(IExpression predicate);
-		int Update<T>(IExpression predicate, object newValue);
+		int Delete<T>(IExpression expression);
+		int Update<T>(IExpression expression, object newValue);
 		void Close();
 	}
 }

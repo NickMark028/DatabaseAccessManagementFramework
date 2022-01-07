@@ -26,7 +26,7 @@ namespace DatabaseAccessManagement
 		}
 		public QueryBuilder<T> Where(IExpression predicate)
 		{
-			WherePredicate = predicate;
+			WhereExpression = predicate;
 			return this;
 		}
 		public IRowCursor Execute()
@@ -36,7 +36,7 @@ namespace DatabaseAccessManagement
 		}
 
 		protected string[] SelectedColumns { get; private set; }
-		protected IExpression WherePredicate { get; private set; }
+		protected IExpression WhereExpression { get; private set; }
 		protected string TableName { get; private set; }
 
 		protected abstract string ToRawQueryString();

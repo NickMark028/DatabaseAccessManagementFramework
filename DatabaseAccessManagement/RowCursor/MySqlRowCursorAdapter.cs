@@ -7,11 +7,11 @@ using MySql.Data.MySqlClient;
 
 namespace DatabaseAccessManagement
 {
-	public class MySqlRowCursor : IRowCursor
+	public class MySqlRowCursorAdapter : IRowCursor
 	{
 		private MySqlDataReader reader;
 
-		public MySqlRowCursor(MySqlDataReader reader)
+		public MySqlRowCursorAdapter(MySqlDataReader reader)
 		{
 			this.reader = reader;
 		}
