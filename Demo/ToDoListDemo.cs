@@ -18,7 +18,7 @@ namespace Demo
 		{
 			try
 			{
-				IDatabase db = new MySqlDb("localhost", 3306, "root", "admin123", "todolist");
+				IDatabase db = new MySqlDb("localhost", 3306, "root", "28200752889396tu", "todolist");
 
 				Console.WriteLine("Creating connection ...");
 				using (IConnection connection = db.CreateConnection())
@@ -57,7 +57,7 @@ namespace Demo
 		{
 			try
 			{
-				IDatabase db = new MySqlDb("localhost", 3306, "root", "admin123", "todolist");
+				IDatabase db = new MySqlDb("localhost", 3306, "root", "28200752889396tu", "todolist");
 
 				Console.WriteLine("Creating connection ...");
 				using (IConnection connection = db.CreateConnection())
@@ -69,7 +69,7 @@ namespace Demo
 
 					Console.WriteLine("\nInserting ...");
 					connection.Insert<TaskToDo>(
-						new TaskToDo[] { new TaskToDo() { task = "test10", isdone = false }, new TaskToDo() { task = "test11", isdone = true } }
+						new { task = "test123234243234", isdone = false }
 						);
 
 					Console.WriteLine("\nClosing connection ...");
@@ -86,7 +86,7 @@ namespace Demo
 		{
 			try
 			{
-				IDatabase db = new MySqlDb("localhost", 3306, "root", "admin123", "todolist");
+				IDatabase db = new MySqlDb("localhost", 3306, "root", "28200752889396tu", "todolist");
 
 				Console.WriteLine("Creating connection ...");
 				using (IConnection connection = db.CreateConnection())
@@ -98,7 +98,7 @@ namespace Demo
 
 					Console.WriteLine("\nCreating a query builder ...");
 					connection.Insert<TaskToDo>(
-						new TaskToDo[] { new TaskToDo() { task = "test10", isdone = false }, new TaskToDo() { task = "test11", isdone = true } }
+						new object[] { new  { task = "test10", isdone = false }, new  { task = "test11", isdone = true } }
 						);
 
 					Console.WriteLine("\nClosing connection ...");
@@ -115,7 +115,7 @@ namespace Demo
 		{
 			try
 			{
-				IDatabase db = new MySqlDb("localhost", 3306, "root", "admin123", "todolist");
+				IDatabase db = new MySqlDb("localhost", 3306, "root", "28200752889396tu", "todolist");
 
 				Console.WriteLine("Creating connection ...");
 				using (IConnection connection = db.CreateConnection())
@@ -145,7 +145,7 @@ namespace Demo
         {
 			try
 			{
-				IDatabase db = new MySqlDb("localhost", 3306, "root", "admin123", "todolist");
+				IDatabase db = new MySqlDb("localhost", 3306, "root", "28200752889396tu", "todolist");
 
 				Console.WriteLine("Creating connection ...");
 				using (IConnection connection = db.CreateConnection())

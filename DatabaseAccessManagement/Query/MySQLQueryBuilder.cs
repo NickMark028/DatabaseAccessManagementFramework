@@ -16,7 +16,7 @@ namespace DatabaseAccessManagement
 			string columns = SelectedColumns == null ? "*": ArrayExtension.ToString(SelectedColumns);
 
 			stringBuilder.Append($"SELECT {columns}");
-			stringBuilder.Append($"\nFROM {TableName}");
+			stringBuilder.Append($"\nFROM `{TableName}`");
 			stringBuilder.Append($"\nWHERE {WhereExpression.ToString()}");
 			stringBuilder.Append(";");
 			return stringBuilder.ToString();

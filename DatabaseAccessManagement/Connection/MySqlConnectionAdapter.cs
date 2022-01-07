@@ -78,13 +78,14 @@ namespace DatabaseAccessManagement
 			}
 			valuesString = valuesString.Remove(valuesString.Length - 2, 2);
 			queryString += columnString + " \nVALUES " + valuesString;
-
+			Console.WriteLine(queryString);
 			return RunDmlQuery(queryString);
 		}
 		int IConnection.Delete<T>(IExpression predicate)
 		{
 			string queryString = "DELETE FROM `" + typeof(T).Name+"`"; 
 			queryString += "\nWHERE " + predicate.ToString();
+			Console.WriteLine(queryString);
 			return RunDmlQuery(queryString);
 		}
 		int IConnection.Update<T>(IExpression predicate, object obj)
@@ -111,7 +112,7 @@ namespace DatabaseAccessManagement
 			setString = setString.Remove(setString.Length - 2, 2);
 
 			queryString += setString + "\nWHERE " + predicate.ToString();
-
+			Console.WriteLine(queryString);
 			return RunDmlQuery(queryString);
 		}
 		public void Close()

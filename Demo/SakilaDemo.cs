@@ -33,7 +33,7 @@ namespace Demo
 		{
 			try
 			{
-				IDatabase db = new MySqlDb("localhost", 3306, "root", "admin123", "sakila");
+				IDatabase db = new MySqlDb("localhost", 3306, "root", "28200752889396tu", "sakila");
 
 				Console.WriteLine("Creating connection ...");
 				using (IConnection connection = db.CreateConnection())
@@ -111,7 +111,7 @@ namespace Demo
 		{
 			try
 			{
-				IDatabase db = new MySqlDb("localhost", 3306, "root", "admin123", "sakila");
+				IDatabase db = new MySqlDb("localhost", 3306, "root", "28200752889396tu", "sakila");
 
 				Console.WriteLine("Creating connection ...");
 				using (IConnection connection = db.CreateConnection())
@@ -165,7 +165,7 @@ namespace Demo
 		{
 			try
 			{
-				IDatabase db = new MySqlDb("localhost", 3306, "root", "admin123", "sakila");
+				IDatabase db = new MySqlDb("localhost", 3306, "root", "28200752889396tu", "sakila");
 
 				Console.WriteLine("Creating connection ...");
 				using (IConnection connection = db.CreateConnection())
@@ -196,7 +196,7 @@ namespace Demo
 		{
 			try
 			{
-				IDatabase db = new MySqlDb("localhost", 3306, "root", "admin123", "sakila");
+				IDatabase db = new MySqlDb("localhost", 3306, "root", "28200752889396tu", "sakila");
 
 				Console.WriteLine("Creating connection ...");
 				using (IConnection connection = db.CreateConnection())
@@ -228,7 +228,7 @@ namespace Demo
 		{
 			try
 			{
-				IDatabase db = new MySqlDb("localhost", 3306, "root", "admin123", "sakila");
+				IDatabase db = new MySqlDb("localhost", 3306, "root", "28200752889396tu", "sakila");
 
 				Console.WriteLine("Creating connection ...");
 				using (IConnection connection = db.CreateConnection())
