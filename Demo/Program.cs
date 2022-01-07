@@ -205,9 +205,11 @@ namespace Demo
 
 
 			//DemoDmlToQueryString();
-
+			Console.WriteLine(true.ToString());
+			Console.WriteLine(false.ToString());
+			Console.WriteLine(new DateTime().ToString());
 			//DemoSelect();
-			DemoInsert();
+			//DemoInsert();
 			//DemoDelete();
 			//DemoToSqlString();
 			//PublicClass.Print();

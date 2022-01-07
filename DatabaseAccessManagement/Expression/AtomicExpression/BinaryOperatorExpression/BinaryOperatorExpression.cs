@@ -1,4 +1,5 @@
-﻿namespace DatabaseAccessManagement
+﻿using System;
+namespace DatabaseAccessManagement
 {
 	public abstract class BinaryOperatorPredicate : IExpression
 	{
@@ -8,7 +9,36 @@
 		public BinaryOperatorPredicate(string leftMember, string rightMember)
 		{
 			this.leftMember = leftMember;
-			this.rightMember = rightMember;
+			this.rightMember = "'"+rightMember+"'"; 
 		}
+		public BinaryOperatorPredicate(string leftMember, Int64 rightMember)
+		{
+			this.leftMember = leftMember;
+			this.rightMember = rightMember.ToString();
+		}
+		public BinaryOperatorPredicate(string leftMember, Decimal rightMember)
+		{
+			this.leftMember = leftMember;
+			this.rightMember = rightMember.ToString();
+		}
+		public BinaryOperatorPredicate(string leftMember, Double rightMember)
+		{
+			this.leftMember = leftMember;
+			this.rightMember = rightMember.ToString();
+		}
+		public BinaryOperatorPredicate(string leftMember, DateTime rightMember)
+		{
+			this.leftMember = leftMember;
+			string temp = rightMember.ToString("MM/dd/yyyy HH:mm:ss");
+			this.rightMember = "'"+temp+"'";
+		}
+
+		public BinaryOperatorPredicate(string leftMember, Boolean rightMember)
+		{
+			this.leftMember = leftMember;
+			this.rightMember = rightMember.ToString();
+		}
+
+		public abstract override string ToString();
 	}
 }
