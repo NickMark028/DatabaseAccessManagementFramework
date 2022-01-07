@@ -1,5 +1,9 @@
-Sample data script: https://dev.mysql.com/doc/index-other.html
+This folder contains 2 database sakila and todolist.
 
-Run sakila-schema.sql to create tables, views, functions, procedures and only then run sakila-data.sql to insert data.
+Sakila demo script: https://dev.mysql.com/doc/index-other.html
 
-Note: This sql script is used for MySQL
+For sakila: Run sakila-schema.sql to create tables, views, functions, procedures and only then run sakila-data.sql to insert data.
+
+For todolist: Run todolist_script
+
+Note: Theses sql scripts are used for MySQL

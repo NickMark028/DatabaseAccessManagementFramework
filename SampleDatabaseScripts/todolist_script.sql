@@ -1,9 +1,10 @@
+CREATE DATABASE todolist;
 use todolist;
 
 create table task (
-id int primary key auto_increment,
-task varchar(1000),
-isdone bool
+	id int primary key auto_increment,
+	task varchar(1000),
+	isdone bool
 );
 
 insert into task (task,isdone) values 
@@ -16,5 +17,4 @@ insert into task (task,isdone) values
 ('test6',true),
 ('test7',false),
 ('test8',true),
-('test9',true)
-;
+('test9',true);
