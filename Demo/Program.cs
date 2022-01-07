@@ -171,6 +171,39 @@ namespace Demo
 				Console.WriteLine(e.Message);
 			}
 		}
+
+			public static void DemoInsertOneRow()
+		{
+			try
+			{
+				IDatabase db = new MySqlDB("localhost", 3306, "root", "admin123", "sakila");
+
+				Console.WriteLine("Creating connection ...");
+				using (IConnection connection = db.CreateConnection())
+				{
+					Console.WriteLine("\nOpening connection ...");
+					connection.Open();
+
+					IPredicate predicate = new GEP("country_id", "101");
+					
+						
+					
+
+					Console.WriteLine("\nCreating a query builder ...");
+					connection.Insert<Country>(
+						new Country{  country = "Afghanistan"  }
+						);
+
+					Console.WriteLine("\nClosing connection ...");
+				}
+
+				Console.WriteLine("\nDone.");
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine(e.Message);
+			}
+		}
 		public static void DemoDelete()
 		{
 			try
@@ -325,6 +358,9 @@ namespace Demo
 
 			//DemoInsertTodolist();
 			DemoDeleteTodoList();
+			//DemoToSqlString();
+			//PublicClass.Print();
+			//*** DemoInsertOneRow();
 			//DemoSelect();
 			Console.ReadKey();
 		}

@@ -33,6 +33,13 @@ namespace DatabaseAccessManagement
 		{
 			return new MySQLQueryBuilder<T>(this);
 		}
+		int IConnection.Insert<T>(object obj)
+        {
+			var obje = new object[1];
+			obje[0]=obj;
+			return (this as IConnection).Insert<T>(obje);
+			
+        }
 		int IConnection.Insert<T>(object[] obj)
 		{
 			string queryString = "INSERT INTO " + typeof(T).Name + " ";
