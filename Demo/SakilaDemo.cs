@@ -245,7 +245,7 @@ namespace Demo
 						new EqualToExpression("category_id", 10), new
 						{
 							name = "ZZZZZZZZZZZZZZZZZZZ",
-							last_update = new DateTime(),
+							last_update = new DateTime(2015, 10,15),
 						}
 						);
 

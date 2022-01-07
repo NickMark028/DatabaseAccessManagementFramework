@@ -109,7 +109,6 @@ namespace DatabaseAccessManagement
 			}
 			setString = setString.Remove(setString.Length - 2, 2);
 			queryString += setString + "\nWHERE " + predicate.ToString();
-			Console.WriteLine(queryString);
 			return RunDmlQuery(queryString);
 		}
 		public void Close()

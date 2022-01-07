@@ -6,20 +6,20 @@ namespace Demo
 	{
 		public static void Main(string[] args)
 		{
-            //var sakilaDemo = new SakilaDemo();
-            //sakilaDemo.DemoSelect();
-            // sakilaDemo.DemoInsert();
-            //sakilaDemo.DemoInsertMany();
-            //sakilaDemo.DemoDelete();
-            //sakilaDemo.DemoUpdate();
+            var sakilaDemo = new SakilaDemo();
+            sakilaDemo.DemoSelect();
+             sakilaDemo.DemoInsert();
+            sakilaDemo.DemoInsertMany();
+            sakilaDemo.DemoDelete();
+            sakilaDemo.DemoUpdate();
 
 
             var toDoListDemo = new ToDoListDemo();
-           //toDoListDemo.DemoSelect();
+           toDoListDemo.DemoSelect();
             toDoListDemo.DemoInsert();
-/*            toDoListDemo.DemoInsertMany();
+           toDoListDemo.DemoInsertMany();
             toDoListDemo.DemoDelete();
-            toDoListDemo.DemoUpdate();*/
+            toDoListDemo.DemoUpdate();
 
             Console.ReadKey();
 		}
