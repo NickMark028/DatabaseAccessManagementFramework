@@ -119,37 +119,39 @@ namespace Demo
 					Console.WriteLine("\nOpening connection ...");
 					connection.Open();
 
-					IExpression predicate = new OrExpression(
-						new AndExpression(new GreaterThanExpression("country_id", "10"), new LessThanExpression("country_id", "30")),
-						new GreaterThanExpression("country_id", "100")
-					);
-
 					Console.WriteLine("\nInserting many ...");
 					connection.Insert<Category>(
 						new object[] {
 							new
 							{
-								name = "tu"
+								name = "tu",
+								last_update = new DateTime(2021, 10, 10)
 							},
 							new
 							{
-								name = "sdflsf"
+								name = "sdflsf",
+								last_update = new DateTime(2021, 10, 10)
 							},
 							new
 							{
-								name = "zzzz"
+								name = "zzzz",
+								last_update = new DateTime(2021, 10, 10)
 							}
 							,
 							new
 							{
-								name = "2222"
+								name = "2222",
+								last_update = new DateTime(2021, 10, 10)
+
 							},
 							new
 							{
-								name = "1111"
+								name = "1111",
+								last_update = new DateTime(2021, 10, 10)
+
 							}
 						}
-						);
+						); ;
 
 					Console.WriteLine("\nClosing connection ...");
 				}
@@ -239,10 +241,11 @@ namespace Demo
 
 
 					Console.WriteLine("\nUpdating");
-					connection.Update<Country>(
-						new EqualToExpression("country_id", "10"), new
+					connection.Update<Category>(
+						new EqualToExpression("category_id", 10), new
 						{
-							country = "newcountry"
+							name = "ZZZZZZZZZZZZZZZZZZZ",
+							last_update = new DateTime(),
 						}
 						);
 

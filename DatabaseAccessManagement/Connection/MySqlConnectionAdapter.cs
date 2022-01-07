@@ -46,7 +46,7 @@ namespace DatabaseAccessManagement
 			string columnString = "(";
 			foreach (var prop in obj[0].GetType().GetProperties())
 			{
-				columnString += prop.Name + ", ";
+				columnString += "`"+ prop.Name + "`, ";
 			}
 
 			columnString = columnString.Remove(columnString.Length - 2, 2);
@@ -65,7 +65,7 @@ namespace DatabaseAccessManagement
 					}
 					else if (prop.PropertyType == typeof(DateTime))
 					{
-						string temp = (((DateTime)prop.GetValue(item))).ToString("MM/dd/yyyy HH:mm:ss");
+						string temp = (((DateTime)prop.GetValue(item))).ToString("yyyy/MM/dd HH:mm:ss");
 						valuesString += "'" + temp + "'" + ", ";
 					}
 					else
@@ -78,14 +78,12 @@ namespace DatabaseAccessManagement
 			}
 			valuesString = valuesString.Remove(valuesString.Length - 2, 2);
 			queryString += columnString + " \nVALUES " + valuesString;
-			Console.WriteLine(queryString);
 			return RunDmlQuery(queryString);
 		}
 		int IConnection.Delete<T>(IExpression predicate)
 		{
 			string queryString = "DELETE FROM `" + typeof(T).Name+"`"; 
 			queryString += "\nWHERE " + predicate.ToString();
-			Console.WriteLine(queryString);
 			return RunDmlQuery(queryString);
 		}
 		int IConnection.Update<T>(IExpression predicate, object obj)
@@ -96,21 +94,20 @@ namespace DatabaseAccessManagement
 			{
 				if (prop.PropertyType == typeof(string))
 				{
-					setString += prop.Name + " = '" + prop.GetValue(obj) + "' ";
+					setString += "`" +prop.Name  + "` = '" + prop.GetValue(obj) + "' ";
 				}
 				else if (prop.PropertyType == typeof(DateTime))
 				{
-					string temp = (((DateTime)prop.GetValue(obj))).ToString("MM/dd/yyyy HH:mm:ss");
-					setString += "'" + temp + "'" + ", ";
+					string temp = (((DateTime)prop.GetValue(obj))).ToString("yyyy/MM/dd HH:mm:ss");
+					setString += "`" + prop.Name + "`" + " = " +"'" + temp + "'"; 
 				}
 				else
 				{
-					setString += prop.Name + " = " + prop.GetValue(obj);
+					setString += "`" + prop.Name + "`" + " = " + prop.GetValue(obj);
 				}
 				setString += ", ";
 			}
 			setString = setString.Remove(setString.Length - 2, 2);
-
 			queryString += setString + "\nWHERE " + predicate.ToString();
 			Console.WriteLine(queryString);
 			return RunDmlQuery(queryString);

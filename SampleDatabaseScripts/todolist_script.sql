@@ -1,10 +1,11 @@
 CREATE DATABASE todolist;
 use todolist;
 
-create table task (
+create table tasktodo (
 	id int primary key auto_increment,
 	task varchar(1000),
-	isdone bool
+	isdone bool,
+	create_at TIMESTAMP
 );
 
 insert into task (task,isdone) values 

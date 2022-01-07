@@ -32,7 +32,6 @@ namespace DatabaseAccessManagement
 		public IRowCursor Execute()
 		{
 			string rawSQL = ToRawQueryString();
-			Console.WriteLine(rawSQL);
 			return connection.RunDqlQuery(rawSQL);
 		}
 

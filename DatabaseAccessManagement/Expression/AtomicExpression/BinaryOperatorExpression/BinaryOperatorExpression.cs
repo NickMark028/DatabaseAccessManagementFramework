@@ -29,7 +29,7 @@ namespace DatabaseAccessManagement
 		public BinaryOperatorPredicate(string leftMember, DateTime rightMember)
 		{
 			this.leftMember = leftMember;
-			string temp = rightMember.ToString("MM/dd/yyyy HH:mm:ss");
+			string temp = rightMember.ToString("yyyy/MM/dd HH:mm:ss");
 			this.rightMember = "'" + temp + "'";
 		}
 		public BinaryOperatorPredicate(string leftMember, Boolean rightMember)

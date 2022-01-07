@@ -10,6 +10,7 @@ namespace Demo
 		public int id { get; set; }
 		public string task { get; set; }
 		public bool isdone { get; set; }
+		public DateTime create_at { get; set; }
 	}
 
 	class ToDoListDemo
@@ -69,7 +70,7 @@ namespace Demo
 
 					Console.WriteLine("\nInserting ...");
 					connection.Insert<TaskToDo>(
-						new { task = "test123234243234", isdone = false }
+						new { task = "test123234243234", isdone = false, create_at = new DateTime(2020,10,10)}
 						);
 
 					Console.WriteLine("\nClosing connection ...");
