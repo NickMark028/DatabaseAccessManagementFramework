@@ -209,6 +209,9 @@ namespace Demo
 			//DemoSelect();
 			DemoInsert();
 			//DemoDelete();
+			//DemoInsert();
+			//DemoDelete();
+			DemoUpdate();
 			//DemoToSqlString();
 			//PublicClass.Print();
 
