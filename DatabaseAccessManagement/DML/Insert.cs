@@ -9,7 +9,6 @@ namespace DatabaseAccessManagement
         public string Name;
         public int Id;
         public float Score;
-        
     }
 
 

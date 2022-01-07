@@ -7,7 +7,7 @@ using MySql.Data.MySqlClient;
 
 namespace DatabaseAccessManagement
 {
-	public class MySqlDB : IDatabase
+	public class MySqlDb : IDatabase
 	{
 		private string host;
 		private int port;
@@ -15,7 +15,7 @@ namespace DatabaseAccessManagement
 		private string password;
 		private string database;
 
-		public MySqlDB(string host, int port, string username, string password, string database)
+		public MySqlDb(string host, int port, string username, string password, string database)
 		{
 			this.host = host;
 			this.port = port;

@@ -25,6 +25,10 @@ namespace DatabaseAccessManagement
 			MySqlCommand cmd = new MySqlCommand(query, connection);
 			return new MySqlRowCursor(cmd.ExecuteReader());
 		}
+		public int RunDmlQuery(string rawQuery)
+		{
+			throw new NotImplementedException();
+		}
 		public QueryBuilder<T> CreateQueryBuilder<T>()
 		{
 			return new MySQLQueryBuilder<T>(this);
@@ -110,5 +114,6 @@ namespace DatabaseAccessManagement
 		{
 			connection.Dispose();
 		}
+
 	}
 }

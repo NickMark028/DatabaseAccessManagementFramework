@@ -6,7 +6,8 @@ namespace DatabaseAccessManagement
 	public interface IConnection : IDisposable
 	{
 		void Open();
-		IRowCursor RunDqlQuery(string query);
+		IRowCursor RunDqlQuery(string rawQuery);
+		int RunDmlQuery(string rawQuery);
 		QueryBuilder<T> CreateQueryBuilder<T>();
 		int Insert<T>(object[] rows);
 		int Delete<T>(IExpression predicate);
