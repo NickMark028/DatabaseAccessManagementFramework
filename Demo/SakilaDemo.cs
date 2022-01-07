@@ -111,7 +111,7 @@ namespace Demo
 		{
 			try
 			{
-				IDatabase db = new MySqlDb("localhost", 3306, "root", "28200752889396tu", "sakila");
+				IDatabase db = new MySqlDb("localhost", 3306, "root", "admin123", "sakila");
 
 				Console.WriteLine("Creating connection ...");
 				using (IConnection connection = db.CreateConnection())
@@ -124,7 +124,7 @@ namespace Demo
 						new GreaterThanExpression("country_id", "100")
 					);
 
-					Console.WriteLine("\nCreating a query builder ...");
+					Console.WriteLine("\nInserting many ...");
 					connection.Insert<Category>(
 						new object[] {
 							new
@@ -173,9 +173,9 @@ namespace Demo
 					Console.WriteLine("\nOpening connection ...");
 					connection.Open();
 
-					IExpression predicate = new GreaterThanExpression("country_id", "101");
+					IExpression predicate = new GreaterThanExpression("country_id", "1");
 
-					Console.WriteLine("\nCreating a query builder ...");
+					Console.WriteLine("\nInserting ...");
 					connection.Insert<Country>(
 						new Country { country = "Afghanistan" }
 						);

@@ -6,17 +6,21 @@ namespace Demo
 	{
 		public static void Main(string[] args)
 		{
-		//	var sakilaDemo = new SakilaDemo();
-		//	sakilaDemo.DemoSelect();
-		//	sakilaDemo.DemoInsertMany();
+			var sakilaDemo = new SakilaDemo();
+			//sakilaDemo.DemoSelect();
+			//sakilaDemo.DemoInsertMany();
+			sakilaDemo.DemoInsert();
 		//	sakilaDemo.DemoDelete();
 
-			var toDoListDemo = new ToDoListDemo();
+
+
+
+		//	var toDoListDemo = new ToDoListDemo();
 			//toDoListDemo.DemoSelect();
 			//	toDoListDemo.DemoInsert();
 			//toDoListDemo.DemoInsertMany();
 			//toDoListDemo.DemoDelete();
-			toDoListDemo.DemoUpdate();
+			//toDoListDemo.DemoUpdate();
 
 			Console.ReadKey();
 		}
