@@ -29,7 +29,7 @@ namespace Demo
 					Console.WriteLine("\nCreating a query builder ...");
 					QueryBuilder<TaskToDo> qb = connection.CreateQueryBuilder<TaskToDo>();
 					qb
-						.Select("country_id", "country")
+						.Select("id", "task")
 						.Where(new EqualToExpression("isdone", "FALSE"));
 					Console.WriteLine(qb.ToString());
 
@@ -39,8 +39,8 @@ namespace Demo
 					Console.WriteLine("\nData result ...");
 					while (cursor.MoveNext())
 					{
-						Console.Write(cursor.Current["country_id"] + "\t");
-						Console.WriteLine(cursor.Current["country"]);
+						Console.Write(cursor.Current["id"] + "\t");
+						Console.WriteLine(cursor.Current["task"]);
 					}
 
 					Console.WriteLine("\nClosing connection ...");
@@ -140,5 +140,12 @@ namespace Demo
 				Console.WriteLine(e.Message);
 			}
 		}
+
+		public void DemoUpdate()
+        {
+
+        }
 	}
+
+
 }
