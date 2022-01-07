@@ -127,7 +127,7 @@ namespace Demo
 
 					Console.WriteLine("\nCreating a query builder ...");
 					connection.Delete<TaskToDo>(
-							new EqualToExpression("id", "1")
+							new EqualToExpression("id", "10")
 						); ; ;
 
 					Console.WriteLine("\nClosing connection ...");

@@ -12,9 +12,9 @@ namespace Demo
 		//	sakilaDemo.DemoDelete();
 
 			var toDoListDemo = new ToDoListDemo();
-			toDoListDemo.DemoSelect();
+			//toDoListDemo.DemoSelect();
 		//	toDoListDemo.DemoInsert();
-		//	toDoListDemo.DemoDelete();
+			toDoListDemo.DemoDelete();
 
 			Console.ReadKey();
 		}
