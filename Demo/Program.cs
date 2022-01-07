@@ -176,50 +176,7 @@ namespace Demo
 			}
 		}
 
-		public static void DemoSelectTodoList()
-		{
-			try
-			{
-				IDatabase db = new MySqlDB("localhost", 3306, "root", "admin123", "todolist");
-
-				Console.WriteLine("Creating connection ...");
-				using (IConnection connection = db.CreateConnection())
-				{
-					Console.WriteLine("\nOpening connection ...");
-					connection.Open();
-
-					IPredicate predicate = new OrPredicate(
-						new AndPredicate(new GTP("country_id", "10"), new LEP("country_id", "30")),
-						new GEP("country_id", "100")
-					);
-
-					Console.WriteLine("\nCreating a query builder ...");
-					QueryBuilder<Country> qb = connection.CreateQueryBuilder<Country>();
-					qb
-						.Select("country_id", "country")
-						.Where(predicate);
-					Console.WriteLine(qb.ToString());
-
-					Console.WriteLine("\nExecuting a select query ...");
-					IRowCursor cursor = qb.Execute();
-
-					Console.WriteLine("\nData result ...");
-					while (cursor.MoveNext())
-					{
-						Console.Write(cursor.Current["country_id"] + "\t");
-						Console.WriteLine(cursor.Current["country"]);
-					}
-
-					Console.WriteLine("\nClosing connection ...");
-				}
-
-				Console.WriteLine("\nDone.");
-			}
-			catch (Exception e)
-			{
-				Console.WriteLine(e.Message);
-			}
-		}
+		
 
 		public static void DemoInsertTodolist()
 		{
@@ -279,7 +236,50 @@ namespace Demo
 				Console.WriteLine(e.Message);
 			}
 		}
+		public static void DemoSelectTodoList()
+		{
+			try
+			{
+				IDatabase db = new MySqlDB("localhost", 3306, "root", "admin123", "todolist");
 
+				Console.WriteLine("Creating connection ...");
+				using (IConnection connection = db.CreateConnection())
+				{
+					Console.WriteLine("\nOpening connection ...");
+					connection.Open();
+
+					IPredicate predicate = new OrPredicate(
+						new AndPredicate(new GTP("country_id", "10"), new LEP("country_id", "30")),
+						new GEP("country_id", "100")
+					);
+
+					Console.WriteLine("\nCreating a query builder ...");
+					QueryBuilder<Country> qb = connection.CreateQueryBuilder<Country>();
+					qb
+						.Select("country_id", "country")
+						.Where(predicate);
+					Console.WriteLine(qb.ToString());
+
+					Console.WriteLine("\nExecuting a select query ...");
+					IRowCursor cursor = qb.Execute();
+
+					Console.WriteLine("\nData result ...");
+					while (cursor.MoveNext())
+					{
+						Console.Write(cursor.Current["country_id"] + "\t");
+						Console.WriteLine(cursor.Current["country"]);
+					}
+
+					Console.WriteLine("\nClosing connection ...");
+				}
+
+				Console.WriteLine("\nDone.");
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine(e.Message);
+			}
+		}
 
 		public static void Main(string[] args)
 		{
