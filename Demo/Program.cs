@@ -8,9 +8,10 @@ namespace Demo
 		{
 			var sakilaDemo = new SakilaDemo();
 			//sakilaDemo.DemoSelect();
+			sakilaDemo.DemoInsert();
 			//sakilaDemo.DemoInsertMany();			
 			//sakilaDemo.DemoDelete();
-			sakilaDemo.DemoUpdate();
+			//sakilaDemo.DemoUpdate();
 
 
 

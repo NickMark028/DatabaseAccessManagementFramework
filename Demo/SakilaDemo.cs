@@ -176,10 +176,12 @@ namespace Demo
 				
 
 					Console.WriteLine("\nInserting ...");
-					connection.Insert<Country>(
-						new Country { country = "Afghanistan" }
-						);
-
+					connection.Insert<Category>(
+						new object[] {
+							new
+							{
+								name = "tu"
+							} });
 					Console.WriteLine("\nClosing connection ...");
 				}
 
