@@ -67,7 +67,7 @@ namespace Demo
 
 
 
-					Console.WriteLine("\nCreating a query builder ...");
+					Console.WriteLine("\nInserting ...");
 					connection.Insert<TaskToDo>(
 						new TaskToDo[] { new TaskToDo() { task = "test10", isdone = false }, new TaskToDo() { task = "test11", isdone = true } }
 						);
@@ -125,7 +125,7 @@ namespace Demo
 
 
 
-					Console.WriteLine("\nCreating a query builder ...");
+					Console.WriteLine("\nDeleting ...");
 					connection.Delete<TaskToDo>(
 							new EqualToExpression("id", "10")
 						); ; ;
@@ -143,8 +143,36 @@ namespace Demo
 
 		public void DemoUpdate()
         {
+			try
+			{
+				IDatabase db = new MySqlDb("localhost", 3306, "root", "admin123", "todolist");
 
-        }
+				Console.WriteLine("Creating connection ...");
+				using (IConnection connection = db.CreateConnection())
+				{
+					Console.WriteLine("\nOpening connection ...");
+					connection.Open();
+
+
+
+					Console.WriteLine("\nUpdating");
+					connection.Update<TaskToDo>(
+						new EqualToExpression("id", "11"), new
+						{
+							task = "newtask"
+						}
+						);
+
+					Console.WriteLine("\nClosing connection ...");
+				}
+
+				Console.WriteLine("\nDone.");
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine(e.Message);
+			}
+		}
 	}
 
 

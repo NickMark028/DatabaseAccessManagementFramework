@@ -13,8 +13,10 @@ namespace Demo
 
 			var toDoListDemo = new ToDoListDemo();
 			//toDoListDemo.DemoSelect();
-		//	toDoListDemo.DemoInsert();
-			toDoListDemo.DemoDelete();
+			//	toDoListDemo.DemoInsert();
+			//toDoListDemo.DemoInsertMany();
+			//toDoListDemo.DemoDelete();
+			toDoListDemo.DemoUpdate();
 
 			Console.ReadKey();
 		}
