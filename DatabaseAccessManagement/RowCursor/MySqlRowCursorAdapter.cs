@@ -16,7 +16,8 @@ namespace DatabaseAccessManagement
 			this.reader = reader;
 		}
 
-		public Row Current
+		object IEnumerator.Current => (this as IEnumerator<IRow>).Current;
+		IRow IEnumerator<IRow>.Current
 		{
 			get
 			{
@@ -31,7 +32,7 @@ namespace DatabaseAccessManagement
 				return new Row(cells, columnNameMap);
 			}
 		}
-		object IEnumerator.Current => Current;
+
 		public void Reset()
 		{
 			// Already reset

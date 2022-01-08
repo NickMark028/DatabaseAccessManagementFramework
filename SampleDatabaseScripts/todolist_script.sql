@@ -1,3 +1,4 @@
+DROP DATABASE todolist;
 CREATE DATABASE todolist;
 use todolist;
 
@@ -8,7 +9,7 @@ create table tasktodo (
 	create_at TIMESTAMP
 );
 
-insert into task (task,isdone) values 
+insert into tasktodo (task,isdone) values 
 ('test',false),
 ('test1',true),
 ('test2',false),

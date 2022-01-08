@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DatabaseAccessManagement
 {
-	interface IRow
+	public interface IRow
 	{
 		object this[int index] { get; }
 		object this[string columeName] { get; }

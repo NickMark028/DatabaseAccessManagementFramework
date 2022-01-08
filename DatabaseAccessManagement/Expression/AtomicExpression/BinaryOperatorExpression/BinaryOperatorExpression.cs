@@ -1,4 +1,5 @@
 ﻿using System;
+
 namespace DatabaseAccessManagement
 {
 	public abstract class BinaryOperatorPredicate : IExpression

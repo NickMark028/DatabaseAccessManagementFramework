@@ -32,7 +32,6 @@ namespace Demo
 					qb
 						.Select("id", "task")
 						.Where(new EqualToExpression("isdone", "FALSE"));
-					Console.WriteLine(qb.ToString());
 
 					Console.WriteLine("\nExecuting a select query ...");
 					IRowCursor cursor = qb.Execute();
@@ -66,12 +65,10 @@ namespace Demo
 					Console.WriteLine("\nOpening connection ...");
 					connection.Open();
 
-
-
 					Console.WriteLine("\nInserting ...");
 					connection.Insert<TaskToDo>(
-						new { task = "test123234243234", isdone = false, create_at = new DateTime(2020,10,10)}
-						);
+						new { task = "test123234243234", isdone = false, create_at = new DateTime(2020, 10, 10) }
+					);
 
 					Console.WriteLine("\nClosing connection ...");
 				}
@@ -95,12 +92,13 @@ namespace Demo
 					Console.WriteLine("\nOpening connection ...");
 					connection.Open();
 
-
-
 					Console.WriteLine("\nCreating a query builder ...");
 					connection.Insert<TaskToDo>(
-						new object[] { new  { task = "test10", isdone = false }, new  { task = "test11", isdone = true } }
-						);
+						new object[] { 
+							new { task = "test10", isdone = false },
+							new { task = "test11", isdone = true } 
+						}
+					);
 
 					Console.WriteLine("\nClosing connection ...");
 				}
@@ -124,12 +122,8 @@ namespace Demo
 					Console.WriteLine("\nOpening connection ...");
 					connection.Open();
 
-
-
 					Console.WriteLine("\nDeleting ...");
-					connection.Delete<TaskToDo>(
-							new EqualToExpression("id", "10")
-						); ; ;
+					connection.Delete<TaskToDo>(new EqualToExpression("id", 10));
 
 					Console.WriteLine("\nClosing connection ...");
 				}
@@ -141,9 +135,8 @@ namespace Demo
 				Console.WriteLine(e.Message);
 			}
 		}
-
 		public void DemoUpdate()
-        {
+		{
 			try
 			{
 				IDatabase db = new MySqlDb("localhost", 3306, "root", "28200752889396tu", "todolist");
@@ -154,15 +147,11 @@ namespace Demo
 					Console.WriteLine("\nOpening connection ...");
 					connection.Open();
 
-
-
 					Console.WriteLine("\nUpdating");
 					connection.Update<TaskToDo>(
-						new EqualToExpression("id", "11"), new
-						{
-							task = "newtask"
-						}
-						);
+						new EqualToExpression("id", "11"),
+						new { task = "newtask" }
+					);
 
 					Console.WriteLine("\nClosing connection ...");
 				}
@@ -175,6 +164,4 @@ namespace Demo
 			}
 		}
 	}
-
-
 }

@@ -7,17 +7,17 @@ namespace Demo
 {
 	class Actor
 	{
-		public int actor_id;
-		public string first_name;
-		public string last_name;
-		public DateTime last_update;
+		public int actor_id { get; set; }
+		public string first_name { get; set; }
+		public string last_name { get; set; }
+		public DateTime last_update { get; set; }
 	}
 
 	class Country
 	{
-		public int country_id;
-		public string country;
-		public DateTime last_update;
+		public int country_id { get; set; }
+		public string country { get; set; }
+		public DateTime last_update { get; set; }
 	}
 
 	class Category
@@ -43,7 +43,7 @@ namespace Demo
 
 					IExpression predicate = new OrExpression(
 						new AndExpression(new GreaterThanExpression("country_id", "10"), new LessThanOrEqualExpression("country_id", "30")),
-						new GreaterThanExpression("country_id", "100")
+						new EqualToExpression("country_id", "100")
 					);
 
 					Console.WriteLine("\nCreating a query builder ...");
@@ -73,39 +73,29 @@ namespace Demo
 				Console.WriteLine(e.Message);
 			}
 		}
-		public void DemoPrecidateToString()
+		public void DemoInsert()
 		{
-			IExpression expression = new AndExpression(
-				new OrExpression(
-					new LessThanExpression("score", "5"),
-					new GreaterThanExpression("age", "3")
-				),
-				new AndExpression(
-					new EqualToExpression("id", "10"),
-					new NotEqualToExpression("address", "Ocean")
-				)
-			);
+			try
+			{
+				IDatabase db = new MySqlDb("localhost", 3306, "root", "28200752889396tu", "sakila");
 
-			Console.WriteLine(expression.ToString());
+				Console.WriteLine("Creating connection ...");
+				using (IConnection connection = db.CreateConnection())
+				{
+					Console.WriteLine("\nOpening connection ...");
+					connection.Open();
 
-			//var queryBuilder = new MySQLQueryBuilder<Actor>();
-			//queryBuilder
-			//	.Select()
-			//	.Where(predicate);
-		}
-		public void DemoDmlToQueryString()
-		{
-			var x = new DML();
-			//Console.WriteLine(x.Delete<StudentA>(new StudentA { Name = "Nguyen Van A", Id = 10, Score = 5.5f }));
-			//Console.WriteLine();
-			Console.WriteLine(x.Insert<StudentA>(new StudentA { Name = "Nguyen Van A", Id = 10, Score = 5.5f }));
-			Console.WriteLine();
+					Console.WriteLine("\nInserting ...");
+					connection.Insert<Category>(new { name = "tu" });
+					Console.WriteLine("\nClosing connection ...");
+				}
 
-			Console.WriteLine(x.Delete<StudentA>(new EqualToExpression("Id", "10"), new StudentA { Name = "Nguyen Van A", Id = 10, Score = 5.5f }));
-			Console.WriteLine();
-
-			Console.WriteLine(x.Update<StudentA>(new EqualToExpression("Id", "10"), new StudentA { Name = "Nguyen Van A", Id = 10, Score = 5.5f }));
-			Console.WriteLine();
+				Console.WriteLine("\nDone.");
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine(e.Message);
+			}
 		}
 		public void DemoInsertMany()
 		{
@@ -148,42 +138,10 @@ namespace Demo
 							{
 								name = "1111",
 								last_update = new DateTime(2021, 10, 10)
-
 							}
 						}
-						); ;
+					);
 
-					Console.WriteLine("\nClosing connection ...");
-				}
-
-				Console.WriteLine("\nDone.");
-			}
-			catch (Exception e)
-			{
-				Console.WriteLine(e.Message);
-			}
-		}
-		public void DemoInsert()
-		{
-			try
-			{
-				IDatabase db = new MySqlDb("localhost", 3306, "root", "28200752889396tu", "sakila");
-
-				Console.WriteLine("Creating connection ...");
-				using (IConnection connection = db.CreateConnection())
-				{
-					Console.WriteLine("\nOpening connection ...");
-					connection.Open();
-
-				
-
-					Console.WriteLine("\nInserting ...");
-					connection.Insert<Category>(
-						new object[] {
-							new
-							{
-								name = "tu"
-							} });
 					Console.WriteLine("\nClosing connection ...");
 				}
 
@@ -206,15 +164,8 @@ namespace Demo
 					Console.WriteLine("\nOpening connection ...");
 					connection.Open();
 
-					IExpression predicate = new OrExpression(
-						new AndExpression(new GreaterThanExpression("country_id", "10"), new LessThanExpression("country_id", "30")),
-						new GreaterThanExpression("country_id", "100")
-					);
-
 					Console.WriteLine("\nDeleting ...");
-					connection.Delete<Category>(
-							new EqualToExpression("category_id", "25")
-						); ; ;
+					connection.Delete<Category>(new EqualToExpression("category_id", 18));
 
 					Console.WriteLine("\nClosing connection ...");
 				}
@@ -238,16 +189,11 @@ namespace Demo
 					Console.WriteLine("\nOpening connection ...");
 					connection.Open();
 
-
-
 					Console.WriteLine("\nUpdating");
 					connection.Update<Category>(
-						new EqualToExpression("category_id", 10), new
-						{
-							name = "ZZZZZZZZZZZZZZZZZZZ",
-							last_update = new DateTime(2015, 10,15),
-						}
-						);
+						new EqualToExpression("category_id", 10),
+						new { name = "ZZZZZZZZZZZZZZZZZZZ", last_update = new DateTime(2015, 10, 15) }
+					);
 
 					Console.WriteLine("\nClosing connection ...");
 				}

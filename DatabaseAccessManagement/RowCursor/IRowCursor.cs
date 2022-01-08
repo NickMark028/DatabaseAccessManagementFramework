@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DatabaseAccessManagement
 {
-	public interface IRowCursor : IEnumerator<Row>
+	public interface IRowCursor : IEnumerator<IRow>
 	{
 	}
 }

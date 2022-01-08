@@ -6,9 +6,8 @@ namespace DatabaseAccessManagement
 {
 	public class MySQLQueryBuilder<T> : QueryBuilder<T>
 	{
-		public MySQLQueryBuilder(IConnection connection) : base(connection)
-		{
-		}
+		public MySQLQueryBuilder(IConnection connection)
+			: base(connection) { }
 
 		protected override string ToRawQueryString()
 		{
